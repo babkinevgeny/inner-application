@@ -22,6 +22,9 @@
     "pug": "^2.0.3"
   },
   "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-sass": "^4.0.2",
     "nodemon": "^1.18.10"
   }
 }
