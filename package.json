@@ -1,0 +1,27 @@
+{
+  "name": "inner-application",
+  "version": "1.0.0",
+  "description": "Application for managing data about clients.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/babkinevgeny/inner-application.git"
+  },
+  "author": "Evgeny Babkin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/babkinevgeny/inner-application/issues"
+  },
+  "homepage": "https://github.com/babkinevgeny/inner-application#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
