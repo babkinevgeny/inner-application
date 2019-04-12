@@ -1,3 +1,5 @@
+const client = require('../util/database')
+
 exports.getIndex = (req, res, next) => {
     res.render('index');
 }
@@ -7,7 +9,14 @@ exports.getLogin = (req, res, next) => {
 }
 
 exports.getBlank = (req, res, next) => {
-    res.render('blank-page');
+    client.connect()
+        .then(() => console.log('connection done!'))
+        .then(() => client.query('SELECT * FROM contractors'))
+        .then((data) => res.render('blank-page', {
+            contractors: data.rows
+        }))
+        .catch(e => console.log(e))
+        .finally(() => client.end());
 }
 
 exports.getCalendar = (req, res, next) => {
