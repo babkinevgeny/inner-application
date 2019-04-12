@@ -8,6 +8,7 @@ block title
   title Blank Page - Zaoks Admin
 
 block content
+  .btn.btn-primary#add-contractor Добавить исполнителя
   //- .app-title
   //-   div
   //-     h1
@@ -28,6 +29,7 @@ block content
           table.table.table-hover.table-bordered#sampleTable
             thead
               tr
+                th ID
                 th Кар
                 th Пр
                 th Название
@@ -37,438 +39,103 @@ block content
                 th Доступ
                 th Телефоны
                 th Имя
-                th E-mail
+                th Email
                 th Комментарий
                 th Специализация
             tbody
-              tr
-                td
-                td 3
-                td "Kancoo технологии штамповки" (Dalian Kancoo Die & Mould Technology Co., Ltd.)
-                td Китай, Люйшунь
-                td kancoo.com.cn
-                td 
-                td 
-                td 
-                  | +8613130484873;
-                  br
-                  | kancoo.irina (Skype)
-                td Евгений Гапонов
-                td evgeniy.kancoo@yandex.com
-                td 89242265557 - это брокер Елена (china-logist.com). Через нее доставка (около 6 000) в РФ (25 дней авто).
-                td ТокФрез ТокФрез Кр Прес Терм
-              tr
-                td
-                td 2
-                td "НПО ДЕКАРТ"
-                td Тутаев
-                td npo-dekart.ru
-                td 
-                td Есть
-                td 
-                  | (4852) 663-889;
-                  br 
-                  | (905) 661-70-29;
-                  br
-                  |(905) 131-76-83
-                td 
-                td info@npo-dekart.ru
-                td 
-                td Строг Зуб ТокФрез ТокФрез Кр ТокАвт ЧПУ ЧПУ Кр Шлиф Эр Свер
-              tr
-                td
-                td 3  
-                td "ТехМеталл"
-                td СПб
-                td техметалл.рф
-                td Кондратьевский проспект, 3
-                td Есть
-                td 8-911-194-81-48; (911)-092-42-62; (921)-961-19-79
-                td Глеб Саженков
-                td tehmetallspb@mail.ru
-                td
-                td Зуборез ЧПУ Ток Свер Сварка Гиб Пор Валь Заклад
-              tr
-                td
-                td 3
-                td "УралЛесТехМонтаж"
-                td Пермь
-                td
-                td
-                td Есть
-                td (964) 378-32-15
-                td Манчиков Николай Владимирович
-                td nm010274@yandex.ru
-                td
-                td Строг Зуб Коо ТокФрез ТокФрез Кр ТокАвт ЧПУ ЧПУ Кр Шлиф Эр Свер Гиб Плаз
-              tr
-                td
-                td 3
-                td «Samruk» (HK) International Investment Co., Limited  
-                td Китай, Шеньян
-                td samrukchina.com
-                td
-                td
-                td
-                td Ирина
-                td irina@samrukchina.com
-                td 
-                td Ток Кр
-              tr
-                td 
-                td 3  
-                td «АРС»  
-                td СПб
-                td arsltd.ru
-                td Обухово  
-                td
-                td 921-997-72-33
-                td Кира
-                td Kira@arsltd.ru
-                td Обрабатывают только мягкие металлы.
-                td ЧПУ Кр
-              tr
-                td
-                td 3
-                td «Глобал-Инструмент»
-                td СПб
-                td globalinstrument.ru
-                td ЛО  
-                td Нет
-                td (812) 981-05-59; (953) 168-77-20
-                td
-                td globalinstrument@mail.ru
-                td info@globalinstrument.ruДелают резцы.
-                td Коо ТокФрез Шлиф Штамп
-              tr
-                td
-                td 3
-                td «Механика»
-                td СПб
-                td spb.mehanika.ru
-                td Софийская, д. 127, к. 5; Уманский пер, 60; ш. Московское, д. 25 Б
-                td Есть
-                td (931)250-66-89; 622 06 52
-                td Михаил (отдел продаж)
-                td info@spb.mehanika.ru
-                td Опрессовка деталей двигателя. Хонингование.
-                td Ток Шлиф Сварка
-              tr
-                td
-                td 3
-                td «РП Пласт М» (ИП Шилкин); ИП Дашунин
-                td Москва
-                td rppm.ru
-                td МО
-                td Есть
-                td 9610031426; 980 315-56-80
-                td Вячеслав Шилкин
-                td gogaland82@gmail.com
-                td Фторопласт, капролон. Паллоидный. Литье. Работают с чугуном. rpplastm@mail.ru
-                td ЧПУ Галь Терм
-              tr 
-                td
-                td 3
-                td tzgroup
-                td Тверь
-                td
-                td
-                td Нет
-                td 900 018-12-91
-                td Cаид Улубеков
-                td tzgroup@mail.ru
-                td Только за нал! Частник.
-                td Ток Шлиф Эр Терм Штамп
-              tr
-                td
-                td 3
-                td Авиаэлектроника
-                td МО
-                td
-                td г. Жуковский
-                td
-                td (985) 704-45-58
-                td
-                td vinokyrov_gena@mail.ru
-                td Работают только с алюминием (д16, д16т и т.д.).
-                td ЧПУ Фрез
-              tr
-                td
-                td 3
-                td Александр
-                td СПб
-                td
-                td проспект Стачек
-                td Нет
-                td 89119363669
-                td
-                td cawok045@gmail.comtd
-                td Частник. Только нал!
-                td Ток Кр
-              tr
-                td
-                td 3
-                td Алексей
-                td
-                td
-                td
-                td
-                td
-                td
-                td alexey@mail.ru
-                td Отправил письмо 10.08.18.
-                td
-              tr
-                td
-                td 3
-                td ООО "СК ПРОГРЕСС"
-                td СПб
-                td
-                td Всеволожск
-                td
-                td 965-794-69-28; 9818944757
-                td Алексей
-                td 9-232232@mail.ru
-                td
-                td ЧПУ
-              tr
-                td
-                td 3
-                td ООО "Альфапромснаб"
-                td Екб
-                td alfapromsnab.ru
-                td Фронтовых Бригадах; Каменск-Уральский
-                td Есть
-                td 908 900-33-45; 83432026699; 83432137466; 904 174-98-78
-                td Тарас Юрьевич; Алексей
-                td 2026699@bk.ru
-                td Работают с 9 ч. 89506454633@bk.ru
-                td Зуборез ТокФрез ТокФрез Кр ЧПУ Шлиф Свер Лаз Гидро Плаз Терм
-              tr
-                td
-                td 3
-                td 3АО "Завод "Киров-Энергомаш"  
-                td СПб
-                td
-                td просп. Стачек, 47
-                td Есть  
-                td 647-63-33; 331-65-34; 302‑61-95; 702‑05-82
-                td Владимир Высоцкий; Юрий
-                td energomash@kzgroup.ru
-                td vladimir.visockiy@energomash.kzgroup.ru
-                td Строг Зуб Коо ТокФрез Кр ТокАвт ЧПУ ЧПУ Кр Шлиф Эр Свер
-              tr
-                td 
-                td 3
-                td АО "Машиностроение Северной верфи" (АО "Машиностроение СВ")
-                td СПб
-                td mb-sv.ru
-                td Корабельная, д. 6
-                td Есть
-                td 3240395;  3240400; доб.3259; 324-03-99; (921)187-82-78
-                td Коммерческий отдел; Гомонова Кристина Евгеньевна
-                td gomonova_ke@mb-sv.ru
-                td mb-sv@mb-sv.ru
-                td ТокФрез Шлиф Сварка Гиб Штамп
-              tr
-                td
-                td 3
-                td АО «Машзавод»
-                td Чита
-                td mashzavod-chita.ru
-                td п. Энергетиков, ул.Строителей, д.1
-                td
-                td 89294871111; (924) 817 5000
-                td Павел Александрович - гл.инженер  
-                td ir.fateeva2013@yandex.ru
-                td zavod.chita@mail.ru
-                td ТокФрез ТокФрез Кр Шлиф Свер Зуб Коо Сварка Гиб Пор Рез Валь
-              tr
-                td
-                td 3
-                td "АО «Пермский завод «Машиностроитель»; АО «Корпорация «Тактическое ракетное вооружение»
-                td Пермь
-                td pzmash.ru
-                td
-                td Нет
-                td (342) 262-68-83; (342) 262-64-25
-                td главный технолог
-                td o-610@pzmash.perm.ru
-                td Шлицы marketing@pzmash.perm.ru
-                td Зуб Ток Плоско Сварка Гиб Галь Терм
-              tr
-                td 
-                td 3
-                td Артем Емелин
-                td СПб
-                td
-                td м. Московские ворота
-                td Нет
-                td 89817346454  
-                td Алексей
-                td emelin_8989@mail.ru  
-                td 1.02.19 появится Ток Кр с ф1000. Можно оплачивать по безналу! Несун! Среднее время ответа 2 рабочих дня.  
-                td ТокФрез
-              tr
-                td
-                td 3
-                td ВалМет
-                td СПб
-                td
-                td
-                td
-                td (950) 221-84-85
-                td Виталий Валюх
-                td vitaliy.valuh@gmail.com
-                td
-                td ТокФрез
-              tr
-                td
-                td 3
-                td ВМЗ (Волковский механический завод)
-                td СПб
-                td vmz-spb.ru
-                td Средняя (Волкова Деревня) ул., д.6 А
-                td
-                td 490-59-95; 923-74-10
-                td 
-                td zavodvmz@list.ru  
-                td Паллоидный зуб. Глубинное сверление.
-                td ТокФрез ЧПУ Шлиф Зуб Сварка Гиб Гиль Терм Штамп
-              tr
-                td
-                td 3
-                td ГК «АКРОН-Л»
-                td СПб
-                td
-                td
-                td
-                td 766-13-65
-                td
-                td
-                td Занято
-                td Рез
-              tr 
-                td
-                td 1п
-                td Денис
-                td СПб
-                td
-                td
-                td
-                td 9214144199
-                td
-                td rab.spb.metal.01@bk.ru
-                td
-                td ЧПУ
-              tr
-                td
-                td 3
-                td "ЗАО "ЭРМЗ; "РМК"; ООО Метлообработка69
-                td Ржев
-                td ermz.ru
-                td Центральная ул., 21; Москва, Озерная 46
-                td Есть
-                td 910 530-25-28
-                td Евгений Коршунов
-                td e-korshunov@mail.ru
-                td Накатка. Паллоидный зуб - при заказе от 2 млн.
-                td Ток Кр ЧПУ Кр Зуб
-              tr
-                td
-                td 3 
-                td Игорь
-                td
-                td
-                td
-                td
-                td 9052701598
-                td
-                td
-                td Недоступен
-                td
-              tr
-                td
-                td 3
-                td Илья
-                td СПб
-                td
-                td
-                td
-                td
-                td
-                td oleschuk.ilya@yandex.ru
-                td Отправил письмо 21.08.18
-                td
-              tr  
-                td
-                td 3
-                td Илья Федоров
-                td СПб
-                td
-                td
-                td
-                td 911-839-39-37
-                td
-                td 1991ilya-fedorov@inbox.ru
-                td Занято. Отправил письмо 21.08.18
-                td
-              tr
-                td
-                td 3
-                td ИП Мигашкина А.М.
-                td Димитровград
-                td sites.google.com/view/metall-migashkina
-                td
-                td Есть
-                td 9378771011;c8(927)8276609
-                td Анна Мигашкина; мама
-                td migashkina.a@mail.ru
-                td Не делают мелкие, точные детали.
-                td ТокФрез Шлиф Свер Сварка Галь Лаз Терм"
-              tr
-                td
-                td 3
-                td КонкордМеталл
-                td СПб
-                td c-met.rutd 
-                td Профессора Качалова, д. 3, лит. А.
-                td Есть
-                td 6402830; 4412333
-                td Артем
-                td 79@c-met.ru
-                td Давальческий материал только при заказе большого объема. Пескоструй. mail@c-met.ru 93@c-met.ru 67@c-met.ru
-                td ТокФрез Шлиф Свер Сварка Гиб Плаз Лентопил Гиль Заклад Лег
-              tr
-                td
-                td 3
-                td Ювиди, ООО
-                td Белоруссия, Минск
-                td
-                td Логойский тракт, 22, 2209
-                td
-                td +375 29 668-98-09; +375 17 385-27-28
-                td Виталий
-                td yvidi@tut.by
-                td Отправил письмо 9.10.18
-                td
-              tr
-                td
-                td
-                td ОАО "НИТИ "Прогресс"
-                td Ижевск
-                td niti-progress.ru
-                td Пушкинская, 268
-                td
-                td 8 (3412) 43-49-27
-                td Алексей Михайлович (нач. производства)
-                td
-                td Отправил письмо 18.02 от ССП.
-                td Ток Кр ЧПУ Кр Фрез Шлиф
+              if contractors === undefined
 
+              else 
+                each contractor in contractors
+                  tr 
+                    td #{contractor.id}
+                    td #{contractor.quarantine}
+                    td #{contractor.priority}
+                    td #{contractor.title}
+                    td #{contractor.city}
+                    td #{contractor.site}
+                    td #{contractor.address}
+                    td #{contractor.access}
+                    td #{contractor.phones}
+                    td #{contractor.name}
+                    td #{contractor.email}
+                    td #{contractor.comment}
+                    td #{contractor.specialization}
+  .modal#modal-contractor(style="display: none")
+    .modal-dialog(role="document")
+      .modal-content
+        .modal-header
+          h5.modal-title Добавить исполнителя
+          button.close#close-modal--top(type="button" data-dismiss="modal" aria-label="Close")
+            span(aria-hidden="true") ×
+        .modal-body
+          form.add-cotractor(action="/add-contractor" method="POST")
+            .row-form
+              label(for="")
+                | Карантин 
+                label(for="quarantine--true")
+                  input#quarantine--true(type="radio" name="quarantine" value="true")
+                  |  Да
+                label(for="quarantine--false")
+                  input#quarantine--false(type="radio" name="quarantine" value="false" checked) 
+                  |  Нет
+              label(for="priority") 
+                | Приоритет 
+                select#priority(name="priority")
+                  option(value="1") 1
+                  option(value="2") 2
+                  option(value="3") 3
+              label(for="title") 
+                | Название 
+                input#title(type="text" name="title")
+            .row-form
+              label(for="city") 
+                | Город 
+                input#city(type="text" name="city")
+              label(for="site") 
+                | Сайт 
+                input#site(type="text" name="site")
+              label(for="address") 
+                | Адрес 
+                input#address(type="text" name="address")
+            .row-form
+              label(for="access") 
+                | Доступ 
+                label(for="access--true")
+                  input#access--true(type="radio" name="access" value="true" checked)
+                  |  Есть
+                label(for="access--false")
+                  input#access--false(type="radio" name="access" value="false") 
+                  |  Нет
+              label(for="phones") 
+                | Телефоны 
+                input#phones(type="text" name="phones")
+              label(for="manager") 
+                | Имя 
+                input#manager(type="text" name="manager")
+            .row-form
+              label(for="email") 
+                | Email 
+                input#email(type="text" name="email")
+              label(for="comment") 
+                | Комментарий 
+                input#comment(type="text" name="comment")
+              label(for="specialization") 
+                | Специализация 
+                input#specialization(type="text" name="specialization")
+            button.btn.btn-primary(type="submit") Добавить
+        .modal-footer
+
+          button.btn.btn-secondary#close-modal--bottom(type="button" data-dismiss="modal") Close
 block specific-js
   // Data table plugin
   script(type='text/javascript', src="js/plugins/jquery.dataTables.min.js")
   script(type='text/javascript', src="js/plugins/dataTables.bootstrap.min.js")
   script(type='text/javascript').
     $('#sampleTable').DataTable();
+    $('#add-contractor').click(() => {
+      $('#modal-contractor').fadeIn();
+    });
+    $('#close-modal--top, #close-modal--bottom').click(() => {
+      $('#modal-contractor').fadeOut();
+    });

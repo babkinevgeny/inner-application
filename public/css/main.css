@@ -12761,3 +12761,17 @@ be a descendant of the grid when it is being dragged.
 
 .user .user-settings label {
   color: #666; }
+
+#modal-contractor .modal-dialog {
+  max-width: 800px; }
+
+.add-cotractor .row-form {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 20px 0; }

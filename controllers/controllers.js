@@ -1,3 +1,5 @@
+const client = require('../util/database')
+
 exports.getIndex = (req, res, next) => {
     res.render('index');
 }
@@ -7,7 +9,23 @@ exports.getLogin = (req, res, next) => {
 }
 
 exports.getBlank = (req, res, next) => {
-    res.render('blank-page');
+    client.query('SELECT * FROM contractors', (err, data) => {
+        res.render('blank-page', {
+            contractors: data.rows
+        });
+    });
+}
+
+exports.postContractor = (req, res, next) => {
+    const data = req.body;
+    const textQuery = 'INSERT INTO contractors (quarantine, priority, title, city, site, address, access, phones, name, email, comment, specialization) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)';
+    const values = [data.quarantine, data.priority, data.title, data.city, data.site, data.address, data.access, data.phones, data.manager, data.email, data.comment, data.specialization];
+    client.query(textQuery, values, (err, res) => {
+        if (err) {
+            console.log(err.stack)
+        }
+    });
+    res.redirect('/blank-page');
 }
 
 exports.getCalendar = (req, res, next) => {

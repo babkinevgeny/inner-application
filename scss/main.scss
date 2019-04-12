@@ -64,3 +64,16 @@
 @import '4-pages/error-page';
 @import '4-pages/mailbox';
 @import '4-pages/user-profile';
+
+#modal-contractor{
+    .modal-dialog{
+        max-width: 800px;
+    }
+}
+.add-cotractor{
+    .row-form{
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 0;
+    }
+}

@@ -28,5 +28,7 @@ router.get('/bootstrap-components', controllers.getBootstrapComponents);
 router.get('/ui-cards', controllers.getCards);
 router.get('/widgets', controllers.getWidgets);
 
+router.post('/add-contractor', controllers.postContractor);
+
 
 module.exports = router;
