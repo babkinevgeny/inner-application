@@ -31,6 +31,7 @@ block content
               tr
                 th ID
                 th Кар
+                th ОПП
                 th Пр
                 th Название
                 th Город
@@ -49,18 +50,35 @@ block content
                 each contractor in contractors
                   tr 
                     td #{contractor.id}
-                    td #{contractor.quarantine}
+
+                    if contractor.quarantine
+                      td Да
+                    else 
+                      td Нет
+
+                    td #{contractor.orgform}
                     td #{contractor.priority}
                     td #{contractor.title}
                     td #{contractor.city}
                     td #{contractor.site}
                     td #{contractor.address}
-                    td #{contractor.access}
+
+                    if contractor.access
+                      td Есть
+                    else if contractor.access === null
+                      td 
+                    else
+                      td Нет
+
                     td #{contractor.phones}
                     td #{contractor.name}
                     td #{contractor.email}
                     td #{contractor.comment}
                     td #{contractor.specialization}
+
+
+
+
   .modal#modal-contractor(style="display: none")
     .modal-dialog(role="document")
       .modal-content
@@ -70,62 +88,65 @@ block content
             span(aria-hidden="true") ×
         .modal-body
           form.add-cotractor(action="/add-contractor" method="POST")
-            .row-form
-              label(for="")
-                | Карантин 
-                label(for="quarantine--true")
-                  input#quarantine--true(type="radio" name="quarantine" value="true")
-                  |  Да
-                label(for="quarantine--false")
-                  input#quarantine--false(type="radio" name="quarantine" value="false" checked) 
-                  |  Нет
-              label(for="priority") 
-                | Приоритет 
-                select#priority(name="priority")
-                  option(value="1") 1
-                  option(value="2") 2
-                  option(value="3") 3
-              label(for="title") 
-                | Название 
-                input#title(type="text" name="title")
-            .row-form
-              label(for="city") 
-                | Город 
-                input#city(type="text" name="city")
-              label(for="site") 
-                | Сайт 
-                input#site(type="text" name="site")
-              label(for="address") 
-                | Адрес 
-                input#address(type="text" name="address")
-            .row-form
-              label(for="access") 
-                | Доступ 
-                label(for="access--true")
-                  input#access--true(type="radio" name="access" value="true" checked)
-                  |  Есть
-                label(for="access--false")
-                  input#access--false(type="radio" name="access" value="false") 
-                  |  Нет
-              label(for="phones") 
-                | Телефоны 
-                input#phones(type="text" name="phones")
-              label(for="manager") 
-                | Имя 
-                input#manager(type="text" name="manager")
-            .row-form
-              label(for="email") 
-                | Email 
-                input#email(type="text" name="email")
-              label(for="comment") 
-                | Комментарий 
-                input#comment(type="text" name="comment")
-              label(for="specialization") 
-                | Специализация 
-                input#specialization(type="text" name="specialization")
-            button.btn.btn-primary(type="submit") Добавить
+            label(for="quarantine") 
+              | Карантин 
+              span.animated-radio-button
+                  label
+                    input#quarantine(type="radio" name="quarantine" value="true")
+                    span.label-text Да
+              span.animated-radio-button
+                  label
+                    input#quarantine(type="radio" name="quarantine" value="false" checked) 
+                    span.label-text Нет
+            label(for="priority") Приоритет 
+              select#priority.form-control(name="priority")
+                option(value="1") 1
+                option(value="2") 2
+                option(value="3") 3
+                option(value="0") 0
+                option(value="Хотят заказы") Хотят заказы
+            label(for="orgform") ОПП 
+              input#orgform.form-control(type="text" name="orgform" autocomplete="off")
+            label(for="title") Название 
+              input#title.form-control(type="text" name="title" autocomplete="off")
+            label(for="city") 
+              | Город 
+              input#city.form-control(type="text" name="city" autocomplete="off")
+            label(for="site") 
+              | Сайт 
+              input#site.form-control(type="text" name="site" autocomplete="off")
+            label(for="address") 
+              | Адрес 
+              input#address.form-control(type="text" name="address" autocomplete="off")
+            label(for="access") 
+              | Доступ 
+              span.animated-radio-button
+                label
+                  input(type="radio" name="access" value="true" autocomplete="off")
+                  span.label-text Есть
+              span.animated-radio-button
+                label
+                  input(type="radio" name="access" value="true" autocomplete="off")
+                  span.label-text Нет
+                
+            label(for="phones") 
+              | Телефоны
+              input#phones.form-control(type="text" name="phones" autocomplete="off")
+            label(for="manager") 
+              | Имя 
+              input#manager.form-control(type="text" name="manager" autocomplete="off")
+            label(for="email") 
+              | Email 
+              input#email.form-control(type="text" name="email" autocomplete="off")
+            label(for="comment") 
+              | Комментарий 
+              input#comment.form-control(type="text" name="comment" autocomplete="off")
+            label(for="specialization") 
+              | Специализация 
+              input#specialization.form-control(type="text" name="specialization" autocomplete="off")
+            
         .modal-footer
-
+          button.btn.btn-primary(type="submit") Добавить
           button.btn.btn-secondary#close-modal--bottom(type="button" data-dismiss="modal") Close
 block specific-js
   // Data table plugin

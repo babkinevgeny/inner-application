@@ -12762,10 +12762,13 @@ be a descendant of the grid when it is being dragged.
 .user .user-settings label {
   color: #666; }
 
-#modal-contractor .modal-dialog {
-  max-width: 800px; }
+#modal-contractor {
+  background: rgba(0, 0, 0, 0.3); }
+  #modal-contractor .modal-dialog {
+    max-width: 400px; }
 
-.add-cotractor .row-form {
+.add-cotractor > label {
+  width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12774,4 +12777,50 @@ be a descendant of the grid when it is being dragged.
   -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin: 20px 0; }
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 10px; }
+  .add-cotractor > label[for="access"], .add-cotractor > label[for="quarantine"] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
+    .add-cotractor > label[for="access"] .animated-radio-button:nth-child(1), .add-cotractor > label[for="quarantine"] .animated-radio-button:nth-child(1) {
+      margin-left: auto;
+      margin-right: 0; }
+    .add-cotractor > label[for="access"] .animated-radio-button:nth-child(2), .add-cotractor > label[for="quarantine"] .animated-radio-button:nth-child(2) {
+      margin-right: 0;
+      margin-left: 40px; }
+  .add-cotractor > label[for="priority"] select {
+    width: 50%; }
+  .add-cotractor > label > input {
+    width: 50%; }
+  .add-cotractor > label .add-field {
+    margin: auto 10px auto auto; }
+
+.add-cotractor .phones {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+  .add-cotractor .phones span {
+    display: inline-block;
+    max-width: 50px; }
+
+.add-field {
+  background: #007bff;
+  width: 16px;
+  height: 16px;
+  -webkit-border-radius: 2px;
+          border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  line-height: 16px; }

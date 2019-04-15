@@ -66,14 +66,62 @@
 @import '4-pages/user-profile';
 
 #modal-contractor{
+    background: rgba(0,0,0,.3);
     .modal-dialog{
-        max-width: 800px;
+        max-width: 400px;
     }
 }
 .add-cotractor{
-    .row-form{
+    & > label{
+        width: 100%;
         display: flex;
         justify-content: space-between;
-        margin: 20px 0;
+        align-items: center;
+        margin-bottom: 10px;
+        &[for="access"],
+        &[for="quarantine"]{
+            display: flex;
+            .animated-radio-button{
+                &:nth-child(1){
+                    margin-left: auto;
+                    margin-right: 0;
+                }
+                &:nth-child(2){
+                    margin-right: 0;
+                    margin-left: 40px;
+                }
+            }
+        }
+        &[for="priority"]{
+            select{
+                width: 50%;
+            }
+        }
+        & > input{
+            width: 50%;
+        }
+        .add-field{
+            margin: auto 10px auto auto;
+        }
     }
+    .phones{
+        display: flex;
+        justify-content: space-between;
+        span{
+            display: inline-block;
+            max-width: 50px;
+        }
+    }
+}
+
+.add-field{
+    background: $blue;
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    line-height: 16px;
 }
