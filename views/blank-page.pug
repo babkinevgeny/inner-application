@@ -70,7 +70,7 @@ block content
                     else
                       td Нет
 
-                    td #{contractor.phones}
+                    td #{contractor.phones} #{contractor.phones}
                     td #{contractor.name}
                     td #{contractor.email}
                     td #{contractor.comment}
@@ -82,72 +82,94 @@ block content
   .modal#modal-contractor(style="display: none")
     .modal-dialog(role="document")
       .modal-content
-        .modal-header
-          h5.modal-title Добавить исполнителя
-          button.close#close-modal--top(type="button" data-dismiss="modal" aria-label="Close")
-            span(aria-hidden="true") ×
-        .modal-body
-          form.add-cotractor(action="/add-contractor" method="POST")
-            label(for="quarantine") 
-              | Карантин 
-              span.animated-radio-button
-                  label
-                    input#quarantine(type="radio" name="quarantine" value="true")
-                    span.label-text Да
-              span.animated-radio-button
-                  label
-                    input#quarantine(type="radio" name="quarantine" value="false" checked) 
-                    span.label-text Нет
-            label(for="priority") Приоритет 
-              select#priority.form-control(name="priority")
-                option(value="1") 1
-                option(value="2") 2
-                option(value="3") 3
-                option(value="0") 0
-                option(value="Хотят заказы") Хотят заказы
-            label(for="orgform") ОПП 
-              input#orgform.form-control(type="text" name="orgform" autocomplete="off")
-            label(for="title") Название 
-              input#title.form-control(type="text" name="title" autocomplete="off")
-            label(for="city") 
-              | Город 
-              input#city.form-control(type="text" name="city" autocomplete="off")
-            label(for="site") 
-              | Сайт 
-              input#site.form-control(type="text" name="site" autocomplete="off")
-            label(for="address") 
-              | Адрес 
-              input#address.form-control(type="text" name="address" autocomplete="off")
-            label(for="access") 
-              | Доступ 
-              span.animated-radio-button
-                label
-                  input(type="radio" name="access" value="true" autocomplete="off")
-                  span.label-text Есть
-              span.animated-radio-button
-                label
-                  input(type="radio" name="access" value="true" autocomplete="off")
-                  span.label-text Нет
-                
-            label(for="phones") 
-              | Телефоны
-              input#phones.form-control(type="text" name="phones" autocomplete="off")
-            label(for="manager") 
-              | Имя 
-              input#manager.form-control(type="text" name="manager" autocomplete="off")
-            label(for="email") 
-              | Email 
-              input#email.form-control(type="text" name="email" autocomplete="off")
-            label(for="comment") 
-              | Комментарий 
-              input#comment.form-control(type="text" name="comment" autocomplete="off")
-            label(for="specialization") 
-              | Специализация 
-              input#specialization.form-control(type="text" name="specialization" autocomplete="off")
-            
-        .modal-footer
-          button.btn.btn-primary(type="submit") Добавить
-          button.btn.btn-secondary#close-modal--bottom(type="button" data-dismiss="modal") Close
+        form.add-contractor(action="/add-contractor" method="POST")
+          .modal-header
+            h5.modal-title Добавить исполнителя
+            button.close#close-modal--top(type="button" data-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") ×
+          .modal-body
+            .row
+              .col-md-2
+                label(for="quarantine") Карантин 
+                .btns-wrapper
+                  span.animated-radio-button
+                      label
+                        input#quarantine(type="radio" name="quarantine" value="true")
+                        span.label-text Да
+                  span.animated-radio-button
+                      label
+                        input#quarantine(type="radio" name="quarantine" value="false" checked) 
+                        span.label-text Нет
+              .col-md-2
+                label(for="access") Доступ 
+                .btns-wrapper
+                  span.animated-radio-button
+                    label
+                      input(type="radio" name="access" value="true" autocomplete="off")
+                      span.label-text Есть
+                  span.animated-radio-button
+                    label
+                      input(type="radio" name="access" value="true" autocomplete="off")
+                      span.label-text Нет
+              .col-md-2
+                label(for="priority") Приоритет 
+                select#priority.form-control(name="priority")
+                  option(value="1") 1
+                  option(value="2") 2
+                  option(value="3") 3
+                  option(value="0") 0
+                  option(value="Хотят заказы") Хотят заказы
+              .col-md-3
+                label(for="orgform") ОПП 
+                input#orgform.form-control(type="text" name="orgform" autocomplete="off")
+              .col-md-3
+                label(for="manager") Имя 
+                input#manager.form-control(type="text" name="manager" autocomplete="off" placeholder=" Имя")
+
+            .row
+              .col-md-2
+                fieldset.titles
+                  legend 
+                    | Названия
+                    .add-field +
+                  input#title1.form-control(type="text" name="title1" autocomplete="off" placeholder="Название 1")
+              .col-md-2  
+                label(for="city") Город 
+                input#city.form-control(type="text" name="city" autocomplete="off" placeholder="Город")
+              .col-md-2
+                fieldset.addresses
+                  legend 
+                    | Адреса 
+                    .add-field +
+                  input#address1.form-control(type="text" name="address1" autocomplete="off" placeholder="Адрес 1")
+              .col-md-2
+                fieldset.sites
+                  legend 
+                    | Сайты
+                    .add-field +
+                  input#site1.form-control(type="text" name="site1" autocomplete="off" placeholder="Сайт 1")
+              .col-md-2
+                fieldset.phones
+                  legend 
+                    | Телефоны
+                    .add-field +
+                  input#phone1.form-control(type="text" name="phone1" autocomplete="off" placeholder="Телефон 1")
+              .col-md-2
+                fieldset.emails
+                  legend 
+                    | Почта
+                    .add-field +
+                  input#email1.form-control(type="text" name="email1" autocomplete="off" placeholder="Email 1")        
+            .row
+              .col-md-6
+                label(for="comment") Комментарий 
+                textarea#comment.form-control(rows="6" name="comment" autocomplete="off" placeholder="Комментарий")
+              .col-md-6
+                label(for="specialization") Специализация 
+                input#specialization.form-control(type="text" name="specialization" autocomplete="off" placeholder="Специализация")
+          .modal-footer
+            button.btn.btn-primary(type="submit") Добавить
+            button.btn.btn-secondary#close-modal--bottom(type="button" data-dismiss="modal") Close
 block specific-js
   // Data table plugin
   script(type='text/javascript', src="js/plugins/jquery.dataTables.min.js")
@@ -158,5 +180,72 @@ block specific-js
       $('#modal-contractor').fadeIn();
     });
     $('#close-modal--top, #close-modal--bottom').click(() => {
+      //confirm('Закрытие окна приведет к потере всех введенных данных. Закрыть окно?') ? $('#modal-contractor').fadeOut() : 'qwe';
       $('#modal-contractor').fadeOut();
     });
+
+    $('.titles .add-field').click(function() {
+      const parent = $(this).parents('fieldset');
+      const inputs = parent.find('input');
+      let q = inputs.length;
+
+      if (q < 5) {
+        q++;
+        parent.append(`<input type="text" id="title${q}" class="form-control" name="title${q}" placeholder="Название ${q}" autocomplete="off">`);
+      } else {
+        alert('Нельзя добавить больше 5ти полей');
+      }
+    });
+
+    $('.sites .add-field').click(function() {
+      const parent = $(this).parents('fieldset');
+      const inputs = parent.find('input');
+      let q = inputs.length;
+
+      if (q < 5) {
+        q++;
+        parent.append(`<input type="text" id="site${q}" class="form-control" name="site${q}" placeholder="Сайт ${q}" autocomplete="off">`);
+      } else {
+        alert('Нельзя добавить больше 5ти полей');
+      }
+    });
+
+    $('.phones .add-field').click(function() {
+      const parent = $(this).parents('fieldset');
+      const inputs = parent.find('input');
+      let q = inputs.length;
+
+      if (q < 5) {
+        q++;
+        parent.append(`<input type="text" id="phone${q}" class="form-control" name="phone${q}" placeholder="Телефон ${q}" autocomplete="off">`);
+      } else {
+        alert('Нельзя добавить больше 5ти полей');
+      }
+    });
+
+    $('.emails .add-field').click(function() {
+      const parent = $(this).parents('fieldset');
+      const inputs = parent.find('input');
+      let q = inputs.length;
+
+      if (q < 5) {
+        q++;
+        parent.append(`<input type="text" id="email${q}" class="form-control" name="email${q}" placeholder="Email ${q}" autocomplete="off">`);
+      } else {
+        alert('Нельзя добавить больше 5ти полей');
+      }
+    });
+
+    $('.addresses .add-field').click(function() {
+      const parent = $(this).parents('fieldset');
+      const inputs = parent.find('input');
+      let q = inputs.length;
+
+      if (q < 5) {
+        q++;
+        parent.append(`<input type="text" id="address${q}" class="form-control" name="addresses${q}" placeholder="Адрес ${q}" autocomplete="off">`);
+      } else {
+        alert('Нельзя добавить больше 5ти полей');
+      }
+    });
+

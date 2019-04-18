@@ -68,49 +68,56 @@
 #modal-contractor{
     background: rgba(0,0,0,.3);
     .modal-dialog{
-        max-width: 400px;
+        max-width: 1300px;
     }
 }
-.add-cotractor{
-    & > label{
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-        &[for="access"],
-        &[for="quarantine"]{
-            display: flex;
-            .animated-radio-button{
-                &:nth-child(1){
-                    margin-left: auto;
-                    margin-right: 0;
-                }
-                &:nth-child(2){
-                    margin-right: 0;
-                    margin-left: 40px;
-                }
-            }
-        }
-        &[for="priority"]{
-            select{
-                width: 50%;
-            }
-        }
-        & > input{
-            width: 50%;
-        }
-        .add-field{
-            margin: auto 10px auto auto;
+.add-contractor{
+    .row{
+        margin-bottom: 40px;
+        &:last-child{
+            margin-bottom: 0;
         }
     }
-    .phones{
+    
+    label{
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .btns-wrapper{
         display: flex;
-        justify-content: space-between;
-        span{
-            display: inline-block;
-            max-width: 50px;
+        align-items: center;
+        padding: 0.375rem 0;
+    }
+    .animated-radio-button{
+        width: 33%;
+        label{
+            font-size: 14px;
+            font-weight: normal;
         }
+    }
+    fieldset{
+        legend{
+            width: inherit;
+            display: inline-block;
+            margin-right: 0;
+            position: relative;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .add-field{
+            position: absolute;
+            top: 50%;
+            margin-top: -8px;
+            right: -30px;
+        }
+        input{
+            margin-bottom: 10px;
+        }
+    }
+    textarea{
+        resize: none;
     }
 }
 
@@ -124,4 +131,5 @@
     text-align: center;
     font-size: 16px;
     line-height: 16px;
+    user-select: none;
 }

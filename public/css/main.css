@@ -12765,53 +12765,55 @@ be a descendant of the grid when it is being dragged.
 #modal-contractor {
   background: rgba(0, 0, 0, 0.3); }
   #modal-contractor .modal-dialog {
-    max-width: 400px; }
+    max-width: 1300px; }
 
-.add-cotractor > label {
+.add-contractor .row {
+  margin-bottom: 40px; }
+  .add-contractor .row:last-child {
+    margin-bottom: 0; }
+
+.add-contractor label {
   width: 100%;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold; }
+
+.add-contractor .btns-wrapper {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   -webkit-box-align: center;
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-bottom: 10px; }
-  .add-cotractor > label[for="access"], .add-cotractor > label[for="quarantine"] {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex; }
-    .add-cotractor > label[for="access"] .animated-radio-button:nth-child(1), .add-cotractor > label[for="quarantine"] .animated-radio-button:nth-child(1) {
-      margin-left: auto;
-      margin-right: 0; }
-    .add-cotractor > label[for="access"] .animated-radio-button:nth-child(2), .add-cotractor > label[for="quarantine"] .animated-radio-button:nth-child(2) {
-      margin-right: 0;
-      margin-left: 40px; }
-  .add-cotractor > label[for="priority"] select {
-    width: 50%; }
-  .add-cotractor > label > input {
-    width: 50%; }
-  .add-cotractor > label .add-field {
-    margin: auto 10px auto auto; }
+  padding: 0.375rem 0; }
 
-.add-cotractor .phones {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between; }
-  .add-cotractor .phones span {
-    display: inline-block;
-    max-width: 50px; }
+.add-contractor .animated-radio-button {
+  width: 33%; }
+  .add-contractor .animated-radio-button label {
+    font-size: 14px;
+    font-weight: normal; }
+
+.add-contractor fieldset legend {
+  width: inherit;
+  display: inline-block;
+  margin-right: 0;
+  position: relative;
+  font-size: 16px;
+  font-weight: bold; }
+
+.add-contractor fieldset .add-field {
+  position: absolute;
+  top: 50%;
+  margin-top: -8px;
+  right: -30px; }
+
+.add-contractor fieldset input {
+  margin-bottom: 10px; }
+
+.add-contractor textarea {
+  resize: none; }
 
 .add-field {
   background: #007bff;
@@ -12823,4 +12825,8 @@ be a descendant of the grid when it is being dragged.
   cursor: pointer;
   text-align: center;
   font-size: 16px;
-  line-height: 16px; }
+  line-height: 16px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
