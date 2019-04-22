@@ -133,3 +133,12 @@
     line-height: 16px;
     user-select: none;
 }
+
+.info{
+    &__content{
+        display: none;
+        &--active{
+            display: block;
+        }
+    }
+}

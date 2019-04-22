@@ -12830,3 +12830,8 @@ be a descendant of the grid when it is being dragged.
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none; }
+
+.info__content {
+  display: none; }
+  .info__content--active {
+    display: block; }
