@@ -29,6 +29,8 @@ router.get('/ui-cards', controllers.getCards);
 router.get('/widgets', controllers.getWidgets);
 
 router.post('/add-contractor', controllers.postContractor);
+router.post('/get-contractor', controllers.getContractor);
+
 
 
 module.exports = router;

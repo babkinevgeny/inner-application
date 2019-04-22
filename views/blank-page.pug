@@ -48,7 +48,7 @@ block content
 
               else 
                 each contractor in contractors
-                  tr 
+                  tr
                     td #{contractor.id}
 
                     if contractor.quarantine
@@ -58,10 +58,16 @@ block content
 
                     td #{contractor.orgform}
                     td #{contractor.priority}
-                    td #{contractor.title}
+                    -let titles = [contractor.title_1, contractor.title_2, contractor.title_3, contractor.title_4, contractor.title_5].filter(Boolean).join('; ');
+                    td #{titles}
+                    //-td #{contractor.title_1}; #{contractor.title_2}; #{contractor.title_3}; #{contractor.title_4}; #{contractor.title_5}
                     td #{contractor.city}
-                    td #{contractor.site}
-                    td #{contractor.address}
+
+                    -let sites = [contractor.site_1, contractor.site_2, contractor.site_3, contractor.site_4, contractor.site_5].filter(Boolean).join('; ');
+                    td #{sites}
+
+                    -let addresses = [contractor.address_1, contractor.address_2, contractor.address_3, contractor.address_4, contractor.address_5].filter(Boolean).join('; ');
+                    td #{addresses}
 
                     if contractor.access
                       td Есть
@@ -70,15 +76,20 @@ block content
                     else
                       td Нет
 
-                    td #{contractor.phones} #{contractor.phones}
+                    -let phones = [contractor.phone_1, contractor.phone_2, contractor.phone_3, contractor.phone_4, contractor.phone_5].filter(Boolean).join('; ');
+                    td #{phones}
                     td #{contractor.name}
-                    td #{contractor.email}
+
+                    -let emails = [contractor.email_1, contractor.email_2, contractor.email_3, contractor.email_4, contractor.email_5].filter(Boolean).join('; ');
+                    td #{emails}
                     td #{contractor.comment}
                     td #{contractor.specialization}
+      .tile
+        .tile-body
+          include includes/_info.pug
+  
 
-
-
-
+  
   .modal#modal-contractor(style="display: none")
     .modal-dialog(role="document")
       .modal-content
@@ -109,7 +120,7 @@ block content
                       span.label-text Есть
                   span.animated-radio-button
                     label
-                      input(type="radio" name="access" value="true" autocomplete="off")
+                      input(type="radio" name="access" value="false" autocomplete="off")
                       span.label-text Нет
               .col-md-2
                 label(for="priority") Приоритет 
@@ -132,7 +143,7 @@ block content
                   legend 
                     | Названия
                     .add-field +
-                  input#title1.form-control(type="text" name="title1" autocomplete="off" placeholder="Название 1")
+                  input#title1.form-control(type="text" name="title_1" autocomplete="off" placeholder="Название 1")
               .col-md-2  
                 label(for="city") Город 
                 input#city.form-control(type="text" name="city" autocomplete="off" placeholder="Город")
@@ -141,25 +152,25 @@ block content
                   legend 
                     | Адреса 
                     .add-field +
-                  input#address1.form-control(type="text" name="address1" autocomplete="off" placeholder="Адрес 1")
+                  input#address1.form-control(type="text" name="address_1" autocomplete="off" placeholder="Адрес 1")
               .col-md-2
                 fieldset.sites
                   legend 
                     | Сайты
                     .add-field +
-                  input#site1.form-control(type="text" name="site1" autocomplete="off" placeholder="Сайт 1")
+                  input#site1.form-control(type="text" name="site_1" autocomplete="off" placeholder="Сайт 1")
               .col-md-2
                 fieldset.phones
                   legend 
                     | Телефоны
                     .add-field +
-                  input#phone1.form-control(type="text" name="phone1" autocomplete="off" placeholder="Телефон 1")
+                  input#phone1.form-control(type="text" name="phone_1" autocomplete="off" placeholder="Телефон 1")
               .col-md-2
                 fieldset.emails
                   legend 
                     | Почта
                     .add-field +
-                  input#email1.form-control(type="text" name="email1" autocomplete="off" placeholder="Email 1")        
+                  input#email1.form-control(type="text" name="email_1" autocomplete="off" placeholder="Email 1")        
             .row
               .col-md-6
                 label(for="comment") Комментарий 
@@ -191,7 +202,7 @@ block specific-js
 
       if (q < 5) {
         q++;
-        parent.append(`<input type="text" id="title${q}" class="form-control" name="title${q}" placeholder="Название ${q}" autocomplete="off">`);
+        parent.append(`<input type="text" id="title${q}" class="form-control" name="title_${q}" placeholder="Название ${q}" autocomplete="off">`);
       } else {
         alert('Нельзя добавить больше 5ти полей');
       }
@@ -204,7 +215,7 @@ block specific-js
 
       if (q < 5) {
         q++;
-        parent.append(`<input type="text" id="site${q}" class="form-control" name="site${q}" placeholder="Сайт ${q}" autocomplete="off">`);
+        parent.append(`<input type="text" id="site${q}" class="form-control" name="site_${q}" placeholder="Сайт ${q}" autocomplete="off">`);
       } else {
         alert('Нельзя добавить больше 5ти полей');
       }
@@ -217,7 +228,7 @@ block specific-js
 
       if (q < 5) {
         q++;
-        parent.append(`<input type="text" id="phone${q}" class="form-control" name="phone${q}" placeholder="Телефон ${q}" autocomplete="off">`);
+        parent.append(`<input type="text" id="phone${q}" class="form-control" name="phone_${q}" placeholder="Телефон ${q}" autocomplete="off">`);
       } else {
         alert('Нельзя добавить больше 5ти полей');
       }
@@ -230,7 +241,7 @@ block specific-js
 
       if (q < 5) {
         q++;
-        parent.append(`<input type="text" id="email${q}" class="form-control" name="email${q}" placeholder="Email ${q}" autocomplete="off">`);
+        parent.append(`<input type="text" id="email${q}" class="form-control" name="email_${q}" placeholder="Email ${q}" autocomplete="off">`);
       } else {
         alert('Нельзя добавить больше 5ти полей');
       }
@@ -243,9 +254,98 @@ block specific-js
 
       if (q < 5) {
         q++;
-        parent.append(`<input type="text" id="address${q}" class="form-control" name="addresses${q}" placeholder="Адрес ${q}" autocomplete="off">`);
+        parent.append(`<input type="text" id="address${q}" class="form-control" name="address_${q}" placeholder="Адрес ${q}" autocomplete="off">`);
       } else {
         alert('Нельзя добавить больше 5ти полей');
       }
     });
+
+    $('#info__btns .btn').click(function() {
+      const indexBtn = $('#info__btns .btn').index(this);
+      const contentBlocks = $('.info__content');
+      contentBlocks.removeClass('info__content--active');
+      contentBlocks.eq(indexBtn).addClass('info__content--active');
+      $
+    });
+
+    const fillContractor = () => {
+      const rowText = [];
+      console.log($(this));
+    }
+
+    $('#sampleTable tr').click(function() {
+      $('#sampleTable tr').removeClass('table-info');
+      $(this).addClass('table-info');
+      $.ajax({
+        type: 'post',
+        url: 'http://localhost:3000/get-contractor',
+        data: {id: $(this).find('td:first').text()}
+      }).done((data) => {
+        data = data[0];
+        fillSimpleField(data.orgform, 'orgform');
+        fillSimpleField(data.name || data.manager, 'manager');
+        fillSimpleField(data.city, 'city');
+        fillSimpleField(data.comment, 'comment');
+        fillSimpleField(data.specialization, 'specialization');
+        fillPriority(data.priority);
+        fillRadio(data.access, 'access');
+        fillRadio(data.quarantine, 'quarantine');
+        fillMultipleFields([data.site_1, data.site_2, data.site_3, data.site_4, data.site_5], 'site', 'sites');
+        fillMultipleFields([data.title_1, data.title_2, data.title_3, data.title_4, data.title_5], 'title', 'titles');
+        fillMultipleFields([data.phone_1, data.phone_2, data.phone_3, data.phone_4, data.phone_5], 'phone', 'phones');
+        fillMultipleFields([data.email_1, data.email_2, data.email_3, data.email_4, data.email_5], 'email', 'emails');
+        fillMultipleFields([data.address_1, data.address_2, data.address_3, data.address_4, data.address_5], 'address', 'addresses');
+      });
+
+      
+      //- const tdArray = $(this).find('td');
+      //- const rowContent = [];
+      //- $.each(tdArray, function() {
+      //-   rowContent.push($(this).text())
+      //- });
+      //- console.log(rowContent);
+      //console.log(rowContent);
+      //-const rowText = [];
+      //- const rowContent = $(this).find('td');
+      //- for (let i = 1; i < rowContent.length; i++) {
+      //-   rowText.push(rowContent[i].innerText);
+      //- }
+      //- const fields = $('.fix-contractor .fix-contractor__filled');
+      //- for (let j = fields.length - 1, k = rowText.length - 1; j >3; j--, k--) {
+      //-   fields[j].value = rowText[k]
+      //- }
+      //fields[14].value = rowText[12];
+      //- for (let j = fields.length - 1, k = rowText.lenght - 1; j > 3; j--, k-- ) {
+      //-   fields[j].val(rowText[k]);
+      //- }
+    });
+
+
+    const fillRadio = (value, name) => {
+      if (value === null) {
+        $(`.fix-contractor [name='${name}']`).prop('checked', false);
+      } else {
+        $(`.fix-contractor [name='${name}'][value='${value}']`).prop('checked', true);
+      }
+    }
+
+    const fillPriority = value => {
+      $(`.fix-contractor #priority option[value='${value}']`).prop('selected', true);
+    };
+
+    const fillSimpleField = (value, id) => {
+      $(`.fix-contractor #${id}`).val(value);
+    };
+
+    const fillMultipleFields = (arr, name, group) => {
+      arr = arr.filter(Boolean);
+      $(`.fix-contractor .${group} input`).remove();
+      // here should be handler of empty arr
+      for(let i = 0; i < arr.length; i++) {
+        $(`.fix-contractor .${group}`).append(`<input type="text" name="${name}_${i+1}" id="${name}_${i+1} "class="form-control" autocomplete="off">`);
+        $(`.fix-contractor .${group} input`).eq(i).val(arr[i]);
+      }
+    }
+
+
 

@@ -16,10 +16,21 @@ exports.getBlank = (req, res, next) => {
     });
 }
 
+exports.getContractor = (req, res, next) => {
+    const id = req.body.id;
+    client.query(`SELECT * FROM contractors WHERE id = ${id}`, (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.json(data.rows)
+        }
+    });
+}
+
 exports.postContractor = (req, res, next) => {
     const data = req.body;
-    const textQuery = 'INSERT INTO contractors (quarantine, priority, orgform, title, city, site, address, access, phones, name, email, comment, specialization) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)';
-    const values = [data.quarantine, data.priority, data.orgform, data.title, data.city, data.site, data.address, data.access, data.phones, data.manager, data.email, data.comment, data.specialization];
+    const textQuery = 'INSERT INTO contractors (quarantine, priority, orgform, title_1, title_2, title_3, title_4, title_5, city, site_1, site_2, site_3, site_4, site_5, address_1, address_2, address_3, address_4, address_5, access, phone_1, phone_2, phone_3, phone_4, phone_5, name, email_1, email_2, email_3, email_4, email_5, comment, specialization) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33)';
+    const values = [data.quarantine, data.priority, data.orgform, data.title_1, data.title_2, data.title_3, data.title_4, data.title_5, data.city, data.site_1, data.site_2, data.site_3, data.site_4, data.site_5, data.address_1, data.address_2, data.address_3, data.address_4, data.address_5, data.access, data.phone_1, data.phone_2, data.phone_3, data.phone_4, data.phone_5, data.manager, data.email_1, data.email_2, data.email_3, data.email_4, data.email_5, data.comment, data.specialization];
     client.query(textQuery, values, (err, res) => {
         if (err) {
             console.log(err.stack)
