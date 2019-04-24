@@ -1,20 +1,7 @@
-.bs-component(style="margin-bottom: 15px;")
-  #info__btns.btn-group.btn-group-toggle(data-toggle="buttons")
-    label.btn.btn-primary.active
-      input#option1(type="radio" name="options" autocomplete="off" checked="")
-      | Общая информация и контакты
-    label.btn.btn-primary
-      input#option2(type="radio" name="options" autocomplete="off")
-      | Производственные возможности
-    label.btn.btn-primary
-      input#option3(type="radio" name="options" autocomplete="off")
-      | Заказы
-    label.btn.btn-primary
-      input#option4(type="radio" name="options" autocomplete="off")
-      | Документы
 section.info
   .info__content.info__content--common.info__content--active
-    form.add-contractor.fix-contractor
+    form.add-contractor.fix-contractor(action="/update-contractor" method="POST")
+      input(type="text" name="id" id="contractorID" readonly hidden)
       .row
         .col-md-2
           label(for="quarantine") Карантин 
@@ -84,6 +71,9 @@ section.info
         .col-md-6
           label(for="specialization") Специализация 
           input.fix-contractor__filled#specialization.form-control(type="text" name="specialization" autocomplete="off" placeholder="Специализация")
+      .row
+        .col-md-12
+          button.btn.btn-primary(type="submit") Применить изменения
   .info__content.info__content--production
     p Производственные возможности в разработке
   .info__content.info__content--orders

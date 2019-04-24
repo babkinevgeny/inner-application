@@ -142,3 +142,19 @@
         }
     }
 }
+
+// #sampleTable{
+//     display: none;
+// }
+
+.is-changed{
+    border-color: $yellow;
+}
+
+.row-checked{
+    background: lighten($primary-color, 50%);
+}
+
+#contractor-title{
+    line-height: 36px;
+}

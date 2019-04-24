@@ -11958,6 +11958,10 @@ be a descendant of the grid when it is being dragged.
       -webkit-flex: 0 0 auto;
           -ms-flex: 0 0 auto;
               flex: 0 0 auto; }
+  .tile .tile-header {
+    border-bottom: 1px solid #ddd;
+    padding: 0 0 20px 0;
+    margin-bottom: 1rem; }
   .tile .tile-footer {
     border-top: 1px solid #ddd;
     padding: 20px 0 0 0;
@@ -12024,6 +12028,11 @@ be a descendant of the grid when it is being dragged.
   .animated-radio-button input[type="radio"]:checked + .label-text:before {
     content: "";
     color: #06abdd;
+    -webkit-animation: tick 180ms ease-in;
+            animation: tick 180ms ease-in; }
+  .animated-radio-button input[type="radio"].is-changed:checked + .label-text:before {
+    content: "";
+    color: #ffc107;
     -webkit-animation: tick 180ms ease-in;
             animation: tick 180ms ease-in; }
   .animated-radio-button input[type="radio"]:disabled + .label-text {
@@ -12835,3 +12844,12 @@ be a descendant of the grid when it is being dragged.
   display: none; }
   .info__content--active {
     display: block; }
+
+.is-changed {
+  border-color: #ffc107; }
+
+.row-checked {
+  background: #e4f8fe; }
+
+#contractor-title {
+  line-height: 36px; }
