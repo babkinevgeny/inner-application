@@ -8,21 +8,7 @@ block title
   title Blank Page - Zaoks Admin
 
 block content
-  //-.btn.btn-primary#add-contractor Добавить исполнителя
-  //- .app-title
-  //-   div
-  //-     h1
-  //-       i.fa.fa-dashboard
-  //-       |  Blank Page
-  //-     p Start a beautiful journey here
-
-  //-   ul.app-breadcrumb.breadcrumb
-  //-     li.breadcrumb-item
-  //-       i.fa.fa-home.fa-lg
-  //-     li.breadcrumb-item
-  //-       a(href='#') Blank Page
-
-  .row
+  .row.h-50
     .col-md-12
       .tile
         .tile-header
@@ -88,7 +74,7 @@ block content
                     td #{emails}
                     td #{contractor.comment}
                     td #{contractor.specialization}
-      .tile
+      .tile.info__wrapper
         .tile-header
           .row
             .col-md-6
@@ -110,100 +96,8 @@ block content
               h4#contractor-title.m-0.text-right
         .tile-body
           include includes/_info.pug
-  
+  include includes/_modal-contractor
 
-  
-  .modal#modal-contractor(style="display: none")
-    .modal-dialog(role="document")
-      .modal-content
-        form.add-contractor(action="/add-contractor" method="POST")
-          .modal-header
-            h5.modal-title Добавить исполнителя
-            button.close#close-modal--top(type="button" data-dismiss="modal" aria-label="Close")
-              span(aria-hidden="true") ×
-          .modal-body
-            .row
-              .col-md-2
-                label(for="quarantine") Карантин 
-                .btns-wrapper
-                  span.animated-radio-button
-                      label
-                        input#quarantine(type="radio" name="quarantine" value="true")
-                        span.label-text Да
-                  span.animated-radio-button
-                      label
-                        input#quarantine(type="radio" name="quarantine" value="false" checked) 
-                        span.label-text Нет
-              .col-md-2
-                label(for="access") Доступ 
-                .btns-wrapper
-                  span.animated-radio-button
-                    label
-                      input(type="radio" name="access" value="true" autocomplete="off")
-                      span.label-text Есть
-                  span.animated-radio-button
-                    label
-                      input(type="radio" name="access" value="false" autocomplete="off")
-                      span.label-text Нет
-              .col-md-2
-                label(for="priority") Приоритет 
-                select#priority.form-control(name="priority")
-                  option(value="1") 1
-                  option(value="2") 2
-                  option(value="3") 3
-                  option(value="0") 0
-                  option(value="Хотят заказы") Хотят заказы
-              .col-md-3
-                label(for="orgform") ОПП 
-                input#orgform.form-control(type="text" name="orgform" autocomplete="off")
-              .col-md-3
-                label(for="manager") Имя 
-                input#manager.form-control(type="text" name="manager" autocomplete="off" placeholder=" Имя")
-
-            .row
-              .col-md-2
-                fieldset.titles
-                  legend 
-                    | Названия
-                    .add-field +
-                  input#title1.form-control(type="text" name="title_1" autocomplete="off" placeholder="Название 1")
-              .col-md-2  
-                label(for="city") Город 
-                input#city.form-control(type="text" name="city" autocomplete="off" placeholder="Город")
-              .col-md-2
-                fieldset.addresses
-                  legend 
-                    | Адреса 
-                    .add-field +
-                  input#address1.form-control(type="text" name="address_1" autocomplete="off" placeholder="Адрес 1")
-              .col-md-2
-                fieldset.sites
-                  legend 
-                    | Сайты
-                    .add-field +
-                  input#site1.form-control(type="text" name="site_1" autocomplete="off" placeholder="Сайт 1")
-              .col-md-2
-                fieldset.phones
-                  legend 
-                    | Телефоны
-                    .add-field +
-                  input#phone1.form-control(type="text" name="phone_1" autocomplete="off" placeholder="Телефон 1")
-              .col-md-2
-                fieldset.emails
-                  legend 
-                    | Почта
-                    .add-field +
-                  input#email1.form-control(type="text" name="email_1" autocomplete="off" placeholder="Email 1")        
-            .row
-              .col-md-6
-                label(for="comment") Комментарий 
-                textarea#comment.form-control(rows="6" name="comment" autocomplete="off" placeholder="Комментарий")
-              .col-md-6
-                label(for="specialization") Специализация 
-                input#specialization.form-control(type="text" name="specialization" autocomplete="off" placeholder="Специализация")
-          .modal-footer
-            button.btn.btn-primary(type="submit") Добавить
-            button.btn.btn-secondary#close-modal--bottom(type="button" data-dismiss="modal") Close
 block specific-js
   // Data table plugin
   script(type='text/javascript', src="js/plugins/jquery.dataTables.min.js")
@@ -278,13 +172,11 @@ block specific-js
     });
 
     $('#sampleTable').on('click', 'tr', function() {
-      console.log('clicked');
       $('#sampleTable tr.row-checked').removeClass('row-checked');
       $(this).addClass('row-checked');
-
       $.ajax({
         type: 'post',
-        url: 'http://localhost:3000/get-contractor',
+        url: window.location.href.indexOf('localhost:3000') + 1 ? 'http://localhost:3000/get-contractor' : 'https://app.zaoks.ru/get-contractor',
         data: {id: $(this).find('td:first').text()}
       }).done((data) => {
         data = data[0];
@@ -336,6 +228,19 @@ block specific-js
         }
       }
     }
+
+
+    $('#add-machines-row').click( () => {
+      let data_machine_number = +$('.production-capacity .row').last().attr('data-machine-number');
+      let new_machine_number = data_machine_number ? data_machine_number + 1 : 1;
+      const machine_row = `<div class="row" data-machine-number="${new_machine_number}"><div class="col-md-2"><div class="form-group"><label class="machines" for="machines-list">Станки</label><select class="form-control" name="machine-type-${new_machine_number}"><option value="Строгальные станки">Строгальные станки</option><option value="Зуборезные станки">Зуборезные станки</option><option value="Зубошлифовальные станки">Зубошлифовальные станки</option><option value="Координатно-расточные станки">Координатно-расточные станки</option><option value="Токарные станки">Токарные станки</option><option value="Фрезерные станки">Фрезерные станки</option><option value="Токарные станки Крупногабаритные">Токарные станки Крупногабаритные</option><option value="Токарно-карусельная обработка">Токарно-карусельная обработка</option><option value="Фрезерные станки Крупногабаритные">Фрезерные станки Крупногабаритные</option><option value="Токарные автоматы">Токарные автоматы</option><option value="Токарные станки с ЧПУ">Токарные станки с ЧПУ</option><option value="Токарно-фрезерные станки с ЧПУ">Токарно-фрезерные станки с ЧПУ</option><option value="Фрезерные станки с ЧПУ">Фрезерные станки с ЧПУ</option><option value="Токарные станки с ЧПУ Крупногабаритные">Токарные станки с ЧПУ Крупногабаритные</option><option value="Токарно-карусельная обработка с ЧПУ">Токарно-карусельная обработка с ЧПУ</option><option value="Токарно-фрезерные станки с ЧПУ Крупногабаритные">Токарно-фрезерные станки с ЧПУ Крупногабаритные</option><option value="Фрезерные станки с ЧПУ Крупногабаритные">Фрезерные станки с ЧПУ Крупногабаритные</option><option value="Хонингование">Хонингование</option><option value="Внутришлифовальные станки">Внутришлифовальные станки</option><option value="Круглошлифовальные станки">Круглошлифовальные станки</option><option value="Плоскошлифовальные станки">Плоскошлифовальные станки</option><option value="Электроэрозия">Электроэрозия</option><option value="Сверление и зенкерование">Сверление и зенкерование</option></select></div></div><div class="col-md-1"><label class="machines">Длина</label><input class="form-control type="text" name="machine-length-${new_machine_number}"></div><div class="col-md-1"><label class="machines">Ширина</label><input class="form-control type="text" name="machine-width-${new_machine_number}"></div><div class="col-md-1"><label class="machines">Высота</label><input class="form-control type="text" name="machine-height-${new_machine_number}"></div><div class="col-md-1"><label class="machines">Диаметр</label><input class="form-control type="text" name="machine-diameter-${new_machine_number}"></div><div class="col-md-2"><label class="machines">Материал</label><input class="form-control type="text" name="machine-material-${new_machine_number}"></div><div class="col-md-2"><label class="machines">Загружен до</label><input class="form-control" type="date" name="machine-loading-${new_machine_number}"></div>`;
+      $('.production-capacity').append(machine_row);
+    });
+
+    $('#delete-machines-row').click( () => {
+      $('.production-capacity .row').last().remove();
+    })
+
 
 
 

@@ -12774,7 +12774,14 @@ be a descendant of the grid when it is being dragged.
 #modal-contractor {
   background: rgba(0, 0, 0, 0.3); }
   #modal-contractor .modal-dialog {
-    max-width: 1300px; }
+    max-width: 1350px;
+    height: -webkit-calc(100vh - 1.75rem * 2);
+    height: calc(100vh - 1.75rem * 2); }
+  #modal-contractor .modal-content {
+    height: 100%;
+    overflow-y: auto; }
+  #modal-contractor .modal-body {
+    padding: 20px 40px; }
 
 .add-contractor .row {
   margin-bottom: 40px; }
@@ -12783,7 +12790,6 @@ be a descendant of the grid when it is being dragged.
 
 .add-contractor label {
   width: 100%;
-  margin-bottom: 10px;
   font-size: 16px;
   font-weight: bold; }
 
@@ -12845,6 +12851,49 @@ be a descendant of the grid when it is being dragged.
   .info__content--active {
     display: block; }
 
+.info__wrapper {
+  margin-bottom: 0; }
+
+.production-capacity .btn-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 80px; }
+
+.production-capacity .form-group {
+  margin-bottom: 0; }
+
+.production-capacity .form-control--btn {
+  width: 38px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: bold; }
+  .production-capacity .form-control--btn:hover {
+    background-color: #06abdd;
+    border-color: #07bef6;
+    color: white; }
+
+.animated-checkbox .animated-checkbox {
+  padding-left: 20px; }
+
+.inner-fieldset {
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease; }
+
+input.drop-down:checked ~ .inner-fieldset {
+  max-height: 500px;
+  height: 100%;
+  margin-top: 10px; }
+
 .is-changed {
   border-color: #ffc107; }
 
@@ -12853,3 +12902,6 @@ be a descendant of the grid when it is being dragged.
 
 #contractor-title {
   line-height: 36px; }
+
+.fix-contractor .row {
+  margin-bottom: 20px; }

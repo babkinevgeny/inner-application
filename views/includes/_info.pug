@@ -33,18 +33,16 @@ section.info
             option(value="3") 3
             option(value="0") 0
             option(value="Хотят заказы") Хотят заказы
-        .col-md-3
+        .col-md-2
           label(for="orgform") ОПП 
           input.fix-contractor__filled#orgform.form-control(type="text" name="orgform" autocomplete="off")
         .col-md-3
-          label(for="manager") Имя 
-          input.fix-contractor__filled#manager.form-control(type="text" name="manager" autocomplete="off" placeholder=" Имя")
-
-      .row
-        .col-md-2
           fieldset.titles
             legend Названия
             input.fix-contractor__filled#title1.form-control(type="text" name="title_1" autocomplete="off" placeholder="Название 1")
+
+      .row
+        
         .col-md-2  
           label(for="city") Город 
           input.fix-contractor__filled#city.form-control(type="text" name="city" autocomplete="off" placeholder="Город")
@@ -61,13 +59,16 @@ section.info
             legend Телефоны
             input.fix-contractor__filled#phone1.form-control(type="text" name="phone_1" autocomplete="off" placeholder="Телефон 1")
         .col-md-2
+          label(for="manager") Имя 
+          input.fix-contractor__filled#manager.form-control(type="text" name="manager" autocomplete="off" placeholder=" Имя")
+        .col-md-2
           fieldset.emails
             legend Почта
             input.fix-contractor__filled#email1.form-control(type="text" name="email_1" autocomplete="off" placeholder="Email 1")        
       .row
         .col-md-6
           label(for="comment") Комментарий 
-          textarea.fix-contractor__filled#comment.form-control(rows="6" name="comment" autocomplete="off" placeholder="Комментарий")
+          textarea.fix-contractor__filled#comment.form-control(rows="3" name="comment" autocomplete="off" placeholder="Комментарий")
         .col-md-6
           label(for="specialization") Специализация 
           input.fix-contractor__filled#specialization.form-control(type="text" name="specialization" autocomplete="off" placeholder="Специализация")
