@@ -20,7 +20,7 @@ block content
               tr
                 th ID
                 th Кар
-                th ОПП
+                th ОПФ
                 th Пр
                 th Название
                 th Город
@@ -45,7 +45,9 @@ block content
                     else 
                       td Нет
 
-                    td #{contractor.orgform}
+                    -let orgforms = [contractor.orgform_1, contractor.orgform_2, contractor.orgform_3, contractor.orgform_4, contractor.orgform_5].filter(Boolean).join('; ');
+                    td #{orgforms}
+
                     td #{contractor.priority}
 
                     -let titles = [contractor.title_1, contractor.title_2, contractor.title_3, contractor.title_4, contractor.title_5].filter(Boolean).join('; ');
@@ -94,8 +96,13 @@ block content
                     | Документы
             .col-md-2.offset-md-4
               h4#contractor-title.m-0.text-right
-        .tile-body
-          include includes/_info.pug
+        form.add-contractor.fix-contractor(action="/update-contractor" method="POST")
+          .tile-body
+            include includes/_info
+          .tile-footer
+            .row
+              .col-md-12
+                button.btn.btn-primary(type="submit") Применить изменения
   include includes/_modal-contractor
 
 block specific-js
@@ -115,15 +122,25 @@ block specific-js
     const addInput = (name, group) => {
       const parent = $(`#modal-contractor fieldset.${group}`);
       const inputs = parent.find('input');
+      const input_placeholder = inputs.attr('placeholder').split(' ')[0];
       let q = inputs.length;
 
       if (q < 5) {
         q++;
-        parent.append(`<input type="text" id="${name}_${q}" class="form-control" name="${name}_${q}" autocomplete="off">`);
+        parent.append(`<input type="text" id="${name}_${q}" class="form-control" name="${name}_${q}" placeholder="${input_placeholder} ${q}"autocomplete="off">`);
       } else {
         alert('Нельзя добавить больше 5ти полей');
       }
     };
+
+    $('#modal-contractor .delete-field').click(function() {
+      const last_input = $(this).parents('fieldset').find('input').last();
+      if ( last_input.attr('name').split("_")[1] == 1 ) {
+        alert('Нельзя удалить последнее поле');
+      } else {
+        last_input.remove();
+      }
+    });
 
     $('#modal-contractor .titles .add-field').click( () => {
       addInput('title', 'titles');
@@ -145,6 +162,14 @@ block specific-js
       addInput('address', 'addresses');
     });
 
+    $('#modal-contractor .orgforms .add-field').click( () => {
+      addInput('orgform', 'orgforms');
+    });
+
+    $('#modal-contractor .managers .add-field').click( () => {
+      addInput('manager', 'managers');
+    });
+
     $('#info__btns .btn').click(function() {
       const indexBtn = $('#info__btns .btn').index(this);
       const contentBlocks = $('.info__content');
@@ -158,9 +183,26 @@ block specific-js
       console.log($(this));
     }
 
-    //- $(document).ready(function() {
-    //-   $('#sampleTable').fadeIn();
-    //- });
+    const getMachines = () => {
+      $.ajax({
+        type: 'post',
+        url: window.location.href.indexOf('localhost:3000') + 1 ? 'http://localhost:3000/get-machines' : 'https://app.zaoks.ru/get-machines',
+        data: {id: $('.row-checked').find('td:first').text()}
+      }).done((data) => {
+        data = data[0];
+        $('.fix-contractor .table-machines input').val('')
+        fillSimpleField(data.machine_type, 'machine_type');
+        fillSimpleField(data.machine_quantity, 'machine_quantity');
+        fillSimpleField(data.machine_length, 'machine_length');
+        fillSimpleField(data.machine_width, 'machine_width');
+        fillSimpleField(data.machine_height, 'machine_height');
+        fillSimpleField(data.machine_diameter, 'machine_diameter');
+        fillSimpleField(data.machine_material, 'machine_material');
+        fillSimpleField(data.machine_loading, 'machine_loading');
+        fillSimpleField(data.machine_comment, 'machine_comment'); 
+      });
+    }
+
 
     $('.fix-contractor').on('change', 'input, select, textarea', function() {
       $(this).addClass('is-changed');
@@ -182,7 +224,7 @@ block specific-js
         data = data[0];
         $('#contractor-title').text(`Исполнитель №${data.id}`);
         fillSimpleField(data.id, 'contractorID');
-        fillSimpleField(data.orgform, 'orgform');
+        fillMultipleFields([data.orgform_1, data.orgform_2, data.orgform_3, data.orgform_4, data.orgform_5], 'orgform', 'orgforms');
         fillSimpleField(data.manager, 'manager');
         fillSimpleField(data.city, 'city');
         fillSimpleField(data.comment, 'comment');
@@ -196,8 +238,10 @@ block specific-js
         fillMultipleFields([data.email_1, data.email_2, data.email_3, data.email_4, data.email_5], 'email', 'emails');
         fillMultipleFields([data.address_1, data.address_2, data.address_3, data.address_4, data.address_5], 'address', 'addresses');
       });
-
+      getMachines();
     });
+
+    
 
 
     const fillRadio = (value, name) => {
@@ -216,8 +260,9 @@ block specific-js
       $(`.fix-contractor #${id}`).val(value);
     };
 
+
     const fillMultipleFields = (arr, name, group) => {
-      arr = arr.filter(Boolean);
+      //arr = arr.filter(Boolean);
       $(`.fix-contractor .${group} input`).remove();
       if ( arr.length == 0) {
         $(`.fix-contractor .${group}`).append(`<input type="text" name="${name}_1" id="${name}_1" class="form-control" autocomplete="off">`);
@@ -230,16 +275,16 @@ block specific-js
     }
 
 
-    $('#add-machines-row').click( () => {
-      let data_machine_number = +$('.production-capacity .row').last().attr('data-machine-number');
-      let new_machine_number = data_machine_number ? data_machine_number + 1 : 1;
-      const machine_row = `<div class="row" data-machine-number="${new_machine_number}"><div class="col-md-2"><div class="form-group"><label class="machines" for="machines-list">Станки</label><select class="form-control" name="machine-type-${new_machine_number}"><option value="Строгальные станки">Строгальные станки</option><option value="Зуборезные станки">Зуборезные станки</option><option value="Зубошлифовальные станки">Зубошлифовальные станки</option><option value="Координатно-расточные станки">Координатно-расточные станки</option><option value="Токарные станки">Токарные станки</option><option value="Фрезерные станки">Фрезерные станки</option><option value="Токарные станки Крупногабаритные">Токарные станки Крупногабаритные</option><option value="Токарно-карусельная обработка">Токарно-карусельная обработка</option><option value="Фрезерные станки Крупногабаритные">Фрезерные станки Крупногабаритные</option><option value="Токарные автоматы">Токарные автоматы</option><option value="Токарные станки с ЧПУ">Токарные станки с ЧПУ</option><option value="Токарно-фрезерные станки с ЧПУ">Токарно-фрезерные станки с ЧПУ</option><option value="Фрезерные станки с ЧПУ">Фрезерные станки с ЧПУ</option><option value="Токарные станки с ЧПУ Крупногабаритные">Токарные станки с ЧПУ Крупногабаритные</option><option value="Токарно-карусельная обработка с ЧПУ">Токарно-карусельная обработка с ЧПУ</option><option value="Токарно-фрезерные станки с ЧПУ Крупногабаритные">Токарно-фрезерные станки с ЧПУ Крупногабаритные</option><option value="Фрезерные станки с ЧПУ Крупногабаритные">Фрезерные станки с ЧПУ Крупногабаритные</option><option value="Хонингование">Хонингование</option><option value="Внутришлифовальные станки">Внутришлифовальные станки</option><option value="Круглошлифовальные станки">Круглошлифовальные станки</option><option value="Плоскошлифовальные станки">Плоскошлифовальные станки</option><option value="Электроэрозия">Электроэрозия</option><option value="Сверление и зенкерование">Сверление и зенкерование</option></select></div></div><div class="col-md-1"><label class="machines">Длина</label><input class="form-control type="text" name="machine-length-${new_machine_number}"></div><div class="col-md-1"><label class="machines">Ширина</label><input class="form-control type="text" name="machine-width-${new_machine_number}"></div><div class="col-md-1"><label class="machines">Высота</label><input class="form-control type="text" name="machine-height-${new_machine_number}"></div><div class="col-md-1"><label class="machines">Диаметр</label><input class="form-control type="text" name="machine-diameter-${new_machine_number}"></div><div class="col-md-2"><label class="machines">Материал</label><input class="form-control type="text" name="machine-material-${new_machine_number}"></div><div class="col-md-2"><label class="machines">Загружен до</label><input class="form-control" type="date" name="machine-loading-${new_machine_number}"></div>`;
-      $('.production-capacity').append(machine_row);
-    });
+    //- $('#add-machines-row').click( () => {
+    //-   let data_machine_number = +$('.production-capacity .row').last().attr('data-machine-number');
+    //-   let new_machine_number = data_machine_number ? data_machine_number + 1 : 1;
+    //-   const machine_row = `<div class="row" data-machine-number="${new_machine_number}"><div class="col-md-2"><div class="form-group"><label class="machines" for="machines-list">Станки</label><select class="form-control" name="machine_type_${new_machine_number}"><option value="Строгальные станки">Строгальные станки</option><option value="Зуборезные станки">Зуборезные станки</option><option value="Зубошлифовальные станки">Зубошлифовальные станки</option><option value="Координатно-расточные станки">Координатно-расточные станки</option><option value="Токарные станки">Токарные станки</option><option value="Фрезерные станки">Фрезерные станки</option><option value="Токарные станки Крупногабаритные">Токарные станки Крупногабаритные</option><option value="Токарно-карусельная обработка">Токарно-карусельная обработка</option><option value="Фрезерные станки Крупногабаритные">Фрезерные станки Крупногабаритные</option><option value="Токарные автоматы">Токарные автоматы</option><option value="Токарные станки с ЧПУ">Токарные станки с ЧПУ</option><option value="Токарно-фрезерные станки с ЧПУ">Токарно-фрезерные станки с ЧПУ</option><option value="Фрезерные станки с ЧПУ">Фрезерные станки с ЧПУ</option><option value="Токарные станки с ЧПУ Крупногабаритные">Токарные станки с ЧПУ Крупногабаритные</option><option value="Токарно-карусельная обработка с ЧПУ">Токарно-карусельная обработка с ЧПУ</option><option value="Токарно-фрезерные станки с ЧПУ Крупногабаритные">Токарно-фрезерные станки с ЧПУ Крупногабаритные</option><option value="Фрезерные станки с ЧПУ Крупногабаритные">Фрезерные станки с ЧПУ Крупногабаритные</option><option value="Хонингование">Хонингование</option><option value="Внутришлифовальные станки">Внутришлифовальные станки</option><option value="Круглошлифовальные станки">Круглошлифовальные станки</option><option value="Плоскошлифовальные станки">Плоскошлифовальные станки</option><option value="Электроэрозия">Электроэрозия</option><option value="Сверление и зенкерование">Сверление и зенкерование</option></select></div></div><div class="col-md-1"><label class="machines">Длина</label><input class="form-control type="text" name="machine-length-${new_machine_number}"></div><div class="col-md-1"><label class="machines">Ширина</label><input class="form-control type="text" name="machine-width-${new_machine_number}"></div><div class="col-md-1"><label class="machines">Высота</label><input class="form-control type="text" name="machine-height-${new_machine_number}"></div><div class="col-md-1"><label class="machines">Диаметр</label><input class="form-control type="text" name="machine-diameter-${new_machine_number}"></div><div class="col-md-2"><label class="machines">Материал</label><input class="form-control type="text" name="machine-material-${new_machine_number}"></div><div class="col-md-2"><label class="machines">Загружен до</label><input class="form-control" type="date" name="machine-loading-${new_machine_number}"></div>`;
+    //-   $('.production-capacity').append(machine_row);
+    //- });
 
-    $('#delete-machines-row').click( () => {
-      $('.production-capacity .row').last().remove();
-    })
+    //- $('#delete-machines-row').click( () => {
+    //-   $('.production-capacity .row').last().remove();
+    //- })
 
 
 

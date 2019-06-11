@@ -27,15 +27,39 @@ exports.getContractor = (req, res, next) => {
     });
 }
 
+exports.getMachines = (req, res, next) => {
+    const id = req.body.id;
+    client.query(`SELECT * FROM machines WHERE contractor_id = ${id}`, (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.json(data.rows)
+        }
+    });
+}
+
+
+
 exports.postContractor = (req, res, next) => {
     const data = req.body;
-    const textQuery = 'INSERT INTO contractors (quarantine, priority, orgform, title_1, title_2, title_3, title_4, title_5, city, site_1, site_2, site_3, site_4, site_5, address_1, address_2, address_3, address_4, address_5, access, phone_1, phone_2, phone_3, phone_4, phone_5, manager, email_1, email_2, email_3, email_4, email_5, comment, specialization) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33)';
-    const values = [data.quarantine, data.priority, data.orgform, data.title_1, data.title_2, data.title_3, data.title_4, data.title_5, data.city, data.site_1, data.site_2, data.site_3, data.site_4, data.site_5, data.address_1, data.address_2, data.address_3, data.address_4, data.address_5, data.access, data.phone_1, data.phone_2, data.phone_3, data.phone_4, data.phone_5, data.manager, data.email_1, data.email_2, data.email_3, data.email_4, data.email_5, data.comment, data.specialization];
-    client.query(textQuery, values, (err, res) => {
+    const contractorQuery = 'INSERT INTO contractors (quarantine, priority, orgform_1, orgform_2, orgform_3, orgform_4, orgform_5, title_1, title_2, title_3, title_4, title_5, city, site_1, site_2, site_3, site_4, site_5, address_1, address_2, address_3, address_4, address_5, access, phone_1, phone_2, phone_3, phone_4, phone_5, manager, email_1, email_2, email_3, email_4, email_5, comment, specialization) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37)';
+    const contractorValues = [data.quarantine, data.priority, data.orgform_1, data.orgform_2, data.orgform_3, data.orgform_4, data.orgform_5, data.title_1, data.title_2, data.title_3, data.title_4, data.title_5, data.city, data.site_1, data.site_2, data.site_3, data.site_4, data.site_5, data.address_1, data.address_2, data.address_3, data.address_4, data.address_5, data.access, data.phone_1, data.phone_2, data.phone_3, data.phone_4, data.phone_5, data.manager, data.email_1, data.email_2, data.email_3, data.email_4, data.email_5, data.comment, data.specialization];
+
+    client.query(contractorQuery, contractorValues, (err, res) => {
         if (err) {
             console.log(err.stack)
         }
     });
+
+    const machineQuery = 'INSERT INTO machines (machine_type, machine_quantity, machine_length, machine_width, machine_height, machine_diameter, machine_material, machine_loading, machine_comment, contractor_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)';
+    const machineValues = [data.machine_type_1, data.machine_quantity_1, data.machine_length_1, data.machine_width_1, data.machine_height_1, data.machine_diameter_1, data.machine_material_1, data.machine_loading_1, data.machine_comment_1];
+
+    client.query('SELECT id FROM contractors ORDER BY ID DESC LIMIT 1')
+        .then(res => {
+            machineValues.push(res.rows[0].id);
+        })
+        .then(() => client.query(machineQuery, machineValues));
+
     res.redirect('/blank-page');
 }
 

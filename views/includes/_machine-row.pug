@@ -1,0 +1,51 @@
+-const machine_types = ['Строгальные станки','Зуборезные станки','Зубошлифовальные станки','Координатно-расточные станки','Токарные станки','Фрезерные станки','Токарные станки Крупногабаритные','Токарно-карусельная обработка','Фрезерные станки Крупногабаритные','Токарные автоматы','Токарные станки с ЧПУ','Токарно-фрезерные станки с ЧПУ','Фрезерные станки с ЧПУ','Токарные станки с ЧПУ Крупногабаритные','Токарно-карусельная обработка с ЧПУ','Токарно-фрезерные станки с ЧПУ Крупногабаритные','Фрезерные станки с ЧПУ Крупногабаритные','Хонингование','Внутришлифовальные станки','Круглошлифовальные станки','Плоскошлифовальные станки','Электроэрозия','Сверление и зенкерование','Слесарно-сборочные работы'];
+-let index = 1;
+
+each machine_type in machine_types
+	tr
+		td
+			| #{machine_type}
+			input.d-none(type="text" value="Строгальные станки" name=`machine_type_${index}`)
+		td.small
+			input.form-control(type="text" name=`machine_quantity_${index}`)
+		td.small
+			input.form-control(type="text" name=`machine_length_${index}`)
+		td.small
+			input.form-control(type="text" name=`machine_width_${index}`)
+		td.small
+			input.form-control(type="text" name=`machine_height_${index}`)
+		td.small
+			input.form-control(type="text" name=`machine_diameter_${index}`)
+		td.material
+			select.form-control#machines-list(name=`machine_material_${index}`)
+				option(value="" style="display:none;")
+				option(value="только черные металлы") только черные металлы
+				option(value="только сталь") только сталь
+				option(value="только нержавеющая сталь") только нержавеющая сталь
+				option(value="только чугун") только чугун
+				option(value="только хром") только хром
+				option(value="никель") никель
+				option(value="только цветные металлы") только цветные металлы
+				option(value="вольфрам") вольфрам
+				option(value="только алюминий") только алюминий
+				option(value="только титан") только титан
+				option(value="только цинк") только цинк
+				option(value="только медь") только медь
+				option(value="только бронза") только бронза
+				option(value="только латунь") только латунь
+				option(value="магний") магний
+				option(value="только легкоплавкие металлы") только легкоплавкие металлы
+				option(value="все") все
+				option(value="жаропрочка") жаропрочка
+				option(value="только пластмасса") только пластмасса
+				option(value="текстолит") текстолит
+				option(value="паронит") паронит
+				option(value="фторопласт") фторопласт
+				option(value="капролон") капролон
+		td.date
+			input.form-control(type="date" name=`machine_loading_${index}`)
+		td
+			input.form-control(type="text" name=`machine_comment_${index}`)
+
+
+	-index++

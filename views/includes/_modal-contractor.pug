@@ -11,7 +11,7 @@
             .col-md-12
               h4.modal-title.text-center Общая информация и контакты
           .row
-            .col-md-2
+            .col-md-1
               label(for="quarantine") Карантин 
               .btns-wrapper
                 span.animated-radio-button
@@ -22,18 +22,18 @@
                     label
                       input#quarantine(type="radio" name="quarantine" value="false" checked) 
                       span.label-text Нет
-            .col-md-2
+            .col-md-1
               label(for="access") Доступ 
               .btns-wrapper
-                span.animated-radio-button
+                span.animated-checkbox
                   label
-                    input(type="radio" name="access" value="true" autocomplete="off")
+                    input(type="checkbox" name="access" value="true" autocomplete="off")
                     span.label-text Есть
-                span.animated-radio-button
+                span.animated-checkbox
                   label
-                    input(type="radio" name="access" value="false" autocomplete="off")
+                    input(type="checkbox" name="access" value="false" autocomplete="off")
                     span.label-text Нет
-            .col-md-2
+            .col-md-1
               label(for="priority") Приоритет 
               select#priority.form-control(name="priority")
                 option(value="1") 1
@@ -41,17 +41,22 @@
                 option(value="3") 3
                 option(value="0") 0
                 option(value="Хотят заказы") Хотят заказы
+            .col-md-1
+              fieldset.orgforms
+                legend 
+                  | ОПФ
+                  .fields-controllers
+                    .add-field +
+                    .delete-field -
+                input#orgform1.form-control(type="text" name="orgform_1" autocomplete="off" placeholder="ОПФ 1")
             .col-md-2
-              label(for="orgform") ОПП 
-              input#orgform.form-control(type="text" name="orgform" autocomplete="off")
-            .col-md-3
               fieldset.titles
                 legend 
                   | Названия
-                  .add-field +
+                  .fields-controllers
+                    .add-field +
+                    .delete-field -
                 input#title1.form-control(type="text" name="title_1" autocomplete="off" placeholder="Название 1")
-
-          .row
             .col-md-2  
               label(for="city") Город 
               input#city.form-control(type="text" name="city" autocomplete="off" placeholder="Город")
@@ -59,37 +64,87 @@
               fieldset.addresses
                 legend 
                   | Адреса 
-                  .add-field +
+                  .fields-controllers
+                    .add-field +
+                    .delete-field -
                 input#address1.form-control(type="text" name="address_1" autocomplete="off" placeholder="Адрес 1")
             .col-md-2
               fieldset.sites
                 legend 
                   | Сайты
-                  .add-field +
+                  .fields-controllers
+                    .add-field +
+                    .delete-field -
                 input#site1.form-control(type="text" name="site_1" autocomplete="off" placeholder="Сайт 1")
+
+          .row
+            
             .col-md-2
               fieldset.phones
                 legend 
                   | Телефоны
-                  .add-field +
+                  .fields-controllers
+                    .add-field +
+                    .delete-field -
                 input#phone1.form-control(type="text" name="phone_1" autocomplete="off" placeholder="Телефон 1")
             .col-md-2
-              label(for="manager") Имя 
-              input#manager.form-control(type="text" name="manager" autocomplete="off" placeholder=" Имя")
+              fieldset.managers
+                legend 
+                  | Имя
+                  .fields-controllers
+                    .add-field +
+                    .delete-field -
+                input#manager_1.form-control(type="text" name="manager_1" autocomplete="off" placeholder="Имя 1")
             .col-md-2
               fieldset.emails
                 legend 
                   | Почта
-                  .add-field +
-                input#email1.form-control(type="text" name="email_1" autocomplete="off" placeholder="Email 1")        
-          
-          .row
-            .col-md-6
+                  .fields-controllers
+                    .add-field +
+                    .delete-field -
+                input#email1.form-control(type="text" name="email_1" autocomplete="off" placeholder="Email 1")    
+            .col-md-2
               label(for="comment") Комментарий 
               textarea#comment.form-control(rows="6" name="comment" autocomplete="off" placeholder="Комментарий")
-            .col-md-6
+            .col-md-2
               label(for="specialization") Специализация 
               input#specialization.form-control(type="text" name="specialization" autocomplete="off" placeholder="Специализация")
+            .col-md-2
+              .row
+                .col-md-12
+                  .animated-checkbox
+                    label 
+                      | Перекупщик 
+                      input(type="checkbox" name="reseller" autocomplete="off")
+                      span.label-text
+                .col-md-12
+                  .animated-checkbox
+                    label 
+                      | Наш заказчик 
+                      input(type="checkbox" name="customer" autocomplete="off")
+                      span.label-text
+                .col-md-12
+                  .animated-checkbox
+                    label 
+                      | План 
+                      input(type="checkbox" name="plan" autocomplete="off")
+                      span.label-text
+                .col-md-12
+                  .animated-checkbox
+                    label 
+                      | Только за наличные 
+                      input(type="checkbox" name="cash_only" autocomplete="off")
+                      span.label-text
+                .col-md-12
+                  .animated-checkbox
+                    label 
+                      | Занести в пр. возм. 
+                      input(type="checkbox" name="add_to_prod_capacities" autocomplete="off")
+                      span.label-text    
+          
+          .row
+            
+                
           include _production-capacity
           include _uniqueness
         .modal-footer

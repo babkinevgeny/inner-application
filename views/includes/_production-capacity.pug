@@ -2,56 +2,17 @@ section.production-capacity
   .row
     .col-md-12
       h4.modal-title.text-center Производственные возможности
-      .btn-wrapper
-        #add-machines-row.form-control.form-control--btn +
-        #delete-machines-row.form-control.form-control--btn -
-  .row(data-machine-number='1')
-    //- .col-md-1
-    //-   .btn-wrapper
-    //-     button#add-machines-row.form-control.form-control--btn +
-    //-     button#delete-machines-row.form-control.form-control--btn -
-    .col-md-2
-      .form-group
-        label.machines(for="machines-list") Станки
-        select.form-control#machines-list(name="machine-type-1")
-          option(value="Строгальные станки") Строгальные станки
-          option(value="Зуборезные станки") Зуборезные станки
-          option(value="Зубошлифовальные станки") Зубошлифовальные станки
-          option(value="Координатно-расточные станки") Координатно-расточные станки
-          option(value="Токарные станки") Токарные станки
-          option(value="Фрезерные станки") Фрезерные станки
-          option(value="Токарные станки Крупногабаритные") Токарные станки Крупногабаритные
-          option(value="Токарно-карусельная обработка") Токарно-карусельная обработка
-          option(value="Фрезерные станки Крупногабаритные") Фрезерные станки Крупногабаритные
-          option(value="Токарные автоматы") Токарные автоматы
-          option(value="Токарные станки с ЧПУ") Токарные станки с ЧПУ
-          option(value="Токарно-фрезерные станки с ЧПУ") Токарно-фрезерные станки с ЧПУ
-          option(value="Фрезерные станки с ЧПУ") Фрезерные станки с ЧПУ
-          option(value="Токарные станки с ЧПУ Крупногабаритные") Токарные станки с ЧПУ Крупногабаритные
-          option(value="Токарно-карусельная обработка с ЧПУ") Токарно-карусельная обработка с ЧПУ
-          option(value="Токарно-фрезерные станки с ЧПУ Крупногабаритные") Токарно-фрезерные станки с ЧПУ Крупногабаритные
-          option(value="Фрезерные станки с ЧПУ Крупногабаритные") Фрезерные станки с ЧПУ Крупногабаритные
-          option(value="Хонингование") Хонингование
-          option(value="Внутришлифовальные станки") Внутришлифовальные станки
-          option(value="Круглошлифовальные станки") Круглошлифовальные станки
-          option(value="Плоскошлифовальные станки") Плоскошлифовальные станки
-          option(value="Электроэрозия") Электроэрозия
-          option(value="Сверление и зенкерование") Сверление и зенкерование
-    .col-md-1
-      label.machines(for="") Длина
-      input.form-control(type="text" name="machine-length-1")
-    .col-md-1
-      label.machines(for="") Ширина
-      input.form-control(type="text" name="machine-width-1")
-    .col-md-1
-      label.machines(for="") Высота
-      input.form-control(type="text" name="machine-height-1")
-    .col-md-1
-      label.machines(for="") Диаметр
-      input.form-control(type="text" name="machine-diameter-1")
-    .col-md-2
-      label.machines(for="") Материал
-      input.form-control(type="text" name="machine-material-1")
-    .col-md-2
-      label.machines(for="") Загружен до
-      input.form-control(type="date" name="machine-loading-1")
+  .row
+    .col-md-12
+      table.table.table-bordered.table-machines
+        tr
+          th Тип станка
+          th Количество
+          th Длина
+          th Ширина
+          th Высота
+          th Диаметр
+          th Материал
+          th Загружен до
+          th Коментарий
+        include _machine-row

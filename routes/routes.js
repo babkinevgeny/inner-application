@@ -32,6 +32,9 @@ router.post('/add-contractor', controllers.postContractor);
 router.post('/get-contractor', controllers.getContractor);
 router.post('/update-contractor', controllers.updateContractor);
 
+router.post('/get-machines', controllers.getMachines);
+
+
 
 
 
