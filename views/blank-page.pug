@@ -189,17 +189,12 @@ block specific-js
         url: window.location.href.indexOf('localhost:3000') + 1 ? 'http://localhost:3000/get-machines' : 'https://app.zaoks.ru/get-machines',
         data: {id: $('.row-checked').find('td:first').text()}
       }).done((data) => {
-        data = data[0];
-        $('.fix-contractor .table-machines input').val('')
-        fillSimpleField(data.machine_type, 'machine_type');
-        fillSimpleField(data.machine_quantity, 'machine_quantity');
-        fillSimpleField(data.machine_length, 'machine_length');
-        fillSimpleField(data.machine_width, 'machine_width');
-        fillSimpleField(data.machine_height, 'machine_height');
-        fillSimpleField(data.machine_diameter, 'machine_diameter');
-        fillSimpleField(data.machine_material, 'machine_material');
-        fillSimpleField(data.machine_loading, 'machine_loading');
-        fillSimpleField(data.machine_comment, 'machine_comment'); 
+        const table = $('.info .table-machines');
+        table.find('tr').not(':first').remove();
+        $(data).each(function(index, elem) {
+          const row = `<tr><td>${elem.machine_type}</td><td>${elem.machine_quantity}</td><td>${elem.machine_length}</td><td>${elem.machine_width}</td><td>${elem.machine_height}</td><td>${elem.machine_diameter}</td><td>${elem.machine_material}</td><td>${elem.machine_loading}</td><td>${elem.machine_comment}</td></tr>`;
+          table.append(row);
+        })
       });
     }
 
@@ -273,6 +268,15 @@ block specific-js
         }
       }
     }
+
+    $('.add-contractor').submit(function(event) {
+      $('.add-contractor .table-machines tr').each(function(index, value) {
+        if (!$(this).find('input[name="send_machine"]').prop('checked')) {
+          $(this).find('input, select, textarea').attr('disabled', 'disabled');
+        }
+      })
+      return true;
+    })
 
 
     //- $('#add-machines-row').click( () => {

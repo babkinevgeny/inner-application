@@ -4,8 +4,13 @@
 each machine_type in machine_types
 	tr
 		td
+			.animated-checkbox
+				label 
+					input(type="checkbox" name="send_machine" value=`${index}` autocomplete="off")
+					span.label-text
+		td
 			| #{machine_type}
-			input.d-none(type="text" value="Строгальные станки" name=`machine_type_${index}`)
+			input.d-none(type="text" value=`${machine_type}` name=`machine_type_${index}`)
 		td.small
 			input.form-control(type="text" name=`machine_quantity_${index}`)
 		td.small

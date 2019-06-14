@@ -52,13 +52,17 @@ exports.postContractor = (req, res, next) => {
     });
 
     const machineQuery = 'INSERT INTO machines (machine_type, machine_quantity, machine_length, machine_width, machine_height, machine_diameter, machine_material, machine_loading, machine_comment, contractor_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)';
-    const machineValues = [data.machine_type_1, data.machine_quantity_1, data.machine_length_1, data.machine_width_1, data.machine_height_1, data.machine_diameter_1, data.machine_material_1, data.machine_loading_1, data.machine_comment_1];
-
+    let id = '';
     client.query('SELECT id FROM contractors ORDER BY ID DESC LIMIT 1')
         .then(res => {
-            machineValues.push(res.rows[0].id);
+            id = res.rows[0].id;
         })
-        .then(() => client.query(machineQuery, machineValues));
+        .then(() => {
+            for (let i = 0; i < data.send_machine.length; i++) {
+                client.query(machineQuery, [ data[`machine_type_${data.send_machine[i]}`], data[`machine_quantity_${data.send_machine[i]}`], data[`machine_length_${data.send_machine[i]}`], data[`machine_width_${data.send_machine[i]}`], data[`machine_height_${data.send_machine[i]}`], data[`machine_diameter_${data.send_machine[i]}`], data[`machine_material_${data.send_machine[i]}`], data[`machine_loading_${data.send_machine[i]}`], data[`machine_comment_${data.send_machine[i]}`], id]);
+            }
+            
+        });
 
     res.redirect('/blank-page');
 }
