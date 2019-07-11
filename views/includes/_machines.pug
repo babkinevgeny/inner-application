@@ -1,6 +1,6 @@
 .row
 	.col-md-12
-		table.table.table-bordered.table-machines
+		table.table.table-bordered.table-machines#machines-info
 			tr
 				th Тип станка
 				th Количество
@@ -8,7 +8,11 @@
 				th Ширина
 				th Высота
 				th Диаметр
+				th Глубина
+				th Модуль
 				th Материал
 				th Загружен до
 				th Коментарий
-			
+.row
+	.col-md-12
+		button.btn.btn-primary#edit-machines(type="button") Редактировать ПВ

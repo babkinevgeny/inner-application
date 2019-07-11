@@ -8,9 +8,9 @@ exports.getLogin = (req, res, next) => {
     res.render('page-login');
 }
 
-exports.getBlank = (req, res, next) => {
+exports.getContractorsPage = (req, res, next) => {
     client.query('SELECT * FROM contractors', (err, data) => {
-        res.render('blank-page', {
+        res.render('contractors', {
             contractors: data.rows
         });
     });
@@ -51,7 +51,7 @@ exports.postContractor = (req, res, next) => {
         }
     });
 
-    const machineQuery = 'INSERT INTO machines (machine_type, machine_quantity, machine_length, machine_width, machine_height, machine_diameter, machine_material, machine_loading, machine_comment, contractor_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)';
+    const machineQuery = 'INSERT INTO machines (machine_type, machine_quantity, machine_length, machine_width, machine_height, machine_diameter, machine_depth, machine_module, machine_material, machine_loading, machine_comment, contractor_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)';
     let id = '';
     client.query('SELECT id FROM contractors ORDER BY ID DESC LIMIT 1')
         .then(res => {
@@ -59,32 +59,37 @@ exports.postContractor = (req, res, next) => {
         })
         .then(() => {
             for (let i = 0; i < data.send_machine.length; i++) {
-                client.query(machineQuery, [ data[`machine_type_${data.send_machine[i]}`], data[`machine_quantity_${data.send_machine[i]}`], data[`machine_length_${data.send_machine[i]}`], data[`machine_width_${data.send_machine[i]}`], data[`machine_height_${data.send_machine[i]}`], data[`machine_diameter_${data.send_machine[i]}`], data[`machine_material_${data.send_machine[i]}`], data[`machine_loading_${data.send_machine[i]}`], data[`machine_comment_${data.send_machine[i]}`], id]);
+                client.query(machineQuery, [ data[`machine_type_${data.send_machine[i]}`], data[`machine_quantity_${data.send_machine[i]}`], data[`machine_length_${data.send_machine[i]}`], data[`machine_width_${data.send_machine[i]}`], data[`machine_height_${data.send_machine[i]}`], data[`machine_diameter_${data.send_machine[i]}`], data[`machine_depth_${data.send_machine[i]}`], data[`machine_module_${data.send_machine[i]}`], data[`machine_material_${data.send_machine[i]}`], data[`machine_loading_${data.send_machine[i]}`], data[`machine_comment_${data.send_machine[i]}`], id]);
             }
             
         });
 
-    res.redirect('/blank-page');
+    res.redirect('/contractors');
 }
 
 exports.updateContractor = (req, res, next) => {
     const data = req.body;
     const id = Number(data.id);
     delete data.id;
+    
     const dataKeys = Object.keys(data);
     const dataValues = Object.values(data);
+    
     let setPattern = [];
     dataKeys.forEach((key, i) => {
         setPattern.push(`${key} = '${dataValues[i]}'`)
     });
-
     const textQuery = `UPDATE contractors SET ${setPattern.join(', ')} WHERE id = ${id}`;
     client.query(textQuery, (err, res) => {
         if (err) {
             console.log(err.stack)
         }
     });
-    res.redirect('/blank-page');
+    res.redirect('/contractors');
+}
+
+exports.getOrdersPage = (req, res, next) => {
+    res.render('orders');
 }
 
 exports.getCalendar = (req, res, next) => {

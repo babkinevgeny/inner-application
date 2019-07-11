@@ -65,7 +65,9 @@
 @import '4-pages/mailbox';
 @import '4-pages/user-profile';
 
-#modal-contractor{
+#modal-contractor,
+#modal-machines,
+#modal-order{
 
     background: rgba(0,0,0,.3);
     .modal-dialog{
@@ -80,7 +82,23 @@
         padding: 20px 40px
     }
 }
-.add-contractor{
+#modal-order{
+    max-width: 1400px;
+    margin: 0 auto;
+    .details{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+    .detail{
+        padding: 40px 20px;
+        border-top: 2px dashed lighten($primary-color, 40%);
+        border-bottom: 2px dashed lighten($primary-color, 40%);
+        margin-bottom: 20px;
+    }
+}
+.add-contractor,
+.add-order{
     .row{
         margin-bottom: 40px;
         &:last-child{

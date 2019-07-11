@@ -6,7 +6,8 @@ const router = express.Router();
 
 router.get('/', controllers.getIndex);
 router.get('/login', controllers.getLogin);
-router.get('/blank-page', controllers.getBlank);
+router.get('/contractors', controllers.getContractorsPage);
+router.get('/orders', controllers.getOrdersPage);
 router.get('/page-calendar', controllers.getCalendar);
 router.get('/page-error', controllers.getError);
 router.get('/page-invoice', controllers.getInvoice);

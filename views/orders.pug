@@ -1,0 +1,86 @@
+extends layouts/_layout.pug
+
+block variables
+  - var activePage = 'orders'
+  - var activeGroup = 'pages'
+
+block title
+  title Заказы - Zaoks Admin
+
+block content
+  .row.h-50
+    .col-md-12
+      .tile
+        .tile-header
+          .bs-component
+            .btn.btn-primary#add-order Добавить заказ
+        .tile-body
+          table.table.table-hover.table-bordered#sampleTable
+            thead
+              tr
+                th Заголовок 1
+                th Заголовок 2
+                th Заголовок 3
+                th Заголовок 4
+                th Заголовок 5
+                th Заголовок 6
+
+            tbody
+              tr
+                td
+                td
+                td
+                td
+                td
+                td
+              tr
+                td
+                td
+                td
+                td
+                td
+                td
+              tr
+                td
+                td
+                td
+                td
+                td
+                td
+      .tile
+        .tile-header
+          .row
+        .tile-body
+          .row
+        .tile-footer
+          .row
+  include includes/_modal-order
+
+block specific-js
+  // Data table plugin
+  script(type='text/javascript', src="js/plugins/jquery.dataTables.min.js")
+  script(type='text/javascript', src="js/plugins/dataTables.bootstrap.min.js")
+  script(type='text/javascript').
+    $('#sampleTable').DataTable();
+
+    $('#add-order').click(() => {
+      $('#modal-order').fadeIn();
+    });
+
+    $('#close-modal--top, #close-modal--bottom, #close-modal-machines--top, #close-modal-machines--bottom').click(function() {
+      $(this).parents('.modal').fadeOut();
+    });
+
+    $('#add-detail').click(() => {
+      const current_detail_number = +$('.detail:last').attr('data-detail-number') + 1;
+      const detail_code = `<li class="detail detail--${current_detail_number}" data-detail-number="${current_detail_number}"> <div class="row"> <div class="col-md-1"> <label for="detail_name--${current_detail_number}">Деталь</label> </div><div class="col-md-2"> <input class="form-control" type="text" id="detail_name--${current_detail_number}" name="detail_name--${current_detail_number}" placeholder="Наименование детали"/> </div></div><div class="row"> <div class="col-md-1"> <label for="">Количество</label> </div><div class="col-md-2"> <div class="btn-group btn-group-toggle" data-toggle="buttons"> <label class="btn btn-primary active"> <input id="option1" type="radio" name="options" autocomplete="off" checked=""/>Штук </label> <label class="btn btn-primary"> <input id="option2" type="radio" name="options" autocomplete="off"/>Комплектов </label> </div></div><div class="col-md-1"> <input class="form-control" type="text" name="detail_pieces--${current_detail_number}" placeholder="Штук"/> <input class="form-control" type="text" name="detail_kits--${current_detail_number}" placeholder="Комплектов" style="display: none;"/> </div><div class="col-md-1"></div><div class="col-md-1"> <label for="">Материал</label> </div><div class="col-md-3"> <div class="btn-group btn-group-toggle" data-toggle="buttons"> <label class="btn btn-primary active"> <input id="option1" type="radio" name="options" autocomplete="off" checked=""/>Заказчика </label> <label class="btn btn-primary"> <input id="option2" type="radio" name="options" autocomplete="off"/>Исполнителя </label> </div></div><div class="col-md-2"> <input class="form-control" type="text" name="detail_material--${current_detail_number}" placeholder="Материал"/> </div></div><div class="row"> <div class="col-md-1"> <label for="">Проходная цена, руб</label> </div><div class="col-md-1"> <input class="form-control" type="text" name="detail_price--${current_detail_number}" placeholder="Цена"/> </div><div class="col-md-2"> <div class="btn-group btn-group-toggle" data-toggle="buttons"> <label class="btn btn-primary active"> <input type="radio" name="detail_nds--${current_detail_number}" autocomplete="off" checked="" value="true"/>без НДС </label> <label class="btn btn-primary"> <input type="radio" name="detail_nds--${current_detail_number}" autocomplete="off" value="false"/>c НДС </label> </div></div><div class="col-md-1"></div><div class="col-md-3"> <label for="days">Срок выполнения, дней</label> </div><div class="col-md-1"> <input class="form-control" type="text" name="detail_days${current_detail_number}" placeholder="Срок"/> </div><div class="col-md-2"> <div class="btn-group btn-group-toggle" data-toggle="buttons"> <label class="btn btn-primary active"> <input type="radio" name="days" autocomplete="off" checked="" value="true"/>Календарных </label> <label class="btn btn-primary"> <input type="radio" name="days" autocomplete="off" value="false"/>Рабочих </label> </div></div></div></li>`
+      $('ul.details').append(detail_code);
+    });
+
+    $('#remove-detail').click(() => {
+      $('ul.details li.detail:last').remove();
+    });
+
+
+
+
