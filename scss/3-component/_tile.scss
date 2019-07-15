@@ -59,6 +59,12 @@
 		.btn-group { flex: 0 0 auto; }
 	}
 
+	.tile-header {
+		border-bottom: 1px solid #ddd;
+		padding: 0 0 20px 0;
+		margin-bottom: 1rem;
+	}
+
 	.tile-footer {
 		border-top: 1px solid #ddd;
 		padding: 20px 0 0 0;

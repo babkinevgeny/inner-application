@@ -1,0 +1,216 @@
+.modal#modal-order(style="display: none")
+  .modal-dialog(role="document")
+    .modal-content
+      form.add-order#add-order(action="/add-order" method="POST")
+        .modal-header
+          h5.modal-title Добавить заказ
+          button.close#close-modal--top(type="button" data-dismiss="modal" aria-label="Close")
+            span(aria-hidden="true") ×
+        .modal-body
+            .row
+                .col-md-4
+                    label(for="data-of-adding") Дата поступления в аналитический отдел
+                .col-md-2
+                    input.form-control(type="date" id="data_of_adding" name="data_of_adding")
+                .col-md-2
+                    label(for="order_number") Номер заказа
+                .col-md-2
+                    input.form-control(type="text" id="order_number" name="order_number")
+            
+            .row
+                .col-md-1
+                    label(for="cutsomer") Заказчик
+                .col-md-2
+                    input.form-control(type="text" id="customer" name="customer")
+                .col-md-1
+                    label(for="geography") География
+                .col-md-2
+                    .btn-group.btn-group-toggle(data-toggle="buttons")
+                        label.btn.btn-primary.active
+                            input(id="georgaphy--1" type="radio" name="options" autocomplete="off" checked="")
+                            | Км до СПб
+                        label.btn.btn-primary
+                            input(id="geography--2" type="radio" name="options" autocomplete="off")
+                            | Регион
+                .col-md-2
+                    input.form-control(type="text" id="distance" name="distance" placeholder="Км до СПб")
+                    input.form-control(type="text" id="region" name="region" placeholder="Регион" style="display: none")
+                .col-md-1
+                    label(for="probability") Вероятность
+                .col-md-2
+                    input.form-control(type="text" id="probability" name="probability")
+            
+            .row
+                .col-md-6
+                    label(for="data_of_offer") Дата выставления коммерческого предложения (планируемая)
+                .col-md-2
+                    input.form-control(type="date" id="data_of_offer" name="data_of_offer")
+
+            ul.details
+                li.detail.detail--1(data-detail-number="1")
+                    .row
+                        .col-md-1  
+                            label(for="detail_name--1") Деталь
+                        .col-md-2
+                            input.form-control(type="text" id="detail_name--1" name="detail_name--1" placeholder="Наименование детали")
+                    .row
+                        .col-md-1  
+                            label(for="") Количество
+                        .col-md-2
+                            .btn-group.btn-group-toggle(data-toggle="buttons")
+                                label.btn.btn-primary.active
+                                    input(id="option1" type="radio" name="options" autocomplete="off" checked="")
+                                    | Штук
+                                label.btn.btn-primary
+                                    input(id="option2" type="radio" name="options" autocomplete="off")
+                                    | Комплектов
+                        .col-md-1
+                            input.form-control(type="text" name="detail_pieces--1" placeholder="Штук")
+                            input.form-control(type="text" name="detail_kits--1" placeholder="Комплектов" style="display: none")
+                        .col-md-1
+                        .col-md-1  
+                            label(for="") Материал
+                        .col-md-3
+                            .btn-group.btn-group-toggle(data-toggle="buttons")
+                                label.btn.btn-primary.active
+                                    input(id="option1" type="radio" name="options" autocomplete="off" checked="")
+                                    | Заказчика
+                                label.btn.btn-primary
+                                    input(id="option2" type="radio" name="options" autocomplete="off")
+                                    | Исполнителя
+                        .col-md-2
+                            input.form-control(type="text" name="detail_material--1" placeholder="Материал")
+                    .row
+                        .col-md-1
+                            label(for="") Проходная цена, руб
+                        .col-md-1
+                            input.form-control(type="text" name="detail_price--1" placeholder="Цена")
+                        .col-md-2
+                            .btn-group.btn-group-toggle(data-toggle="buttons")
+                                label.btn.btn-primary.active
+                                    input(type="radio" name="detail_nds--1" autocomplete="off" checked="" value="true")
+                                    | без НДС
+                                label.btn.btn-primary
+                                    input( type="radio" name="detail_nds--1" autocomplete="off" value="false")
+                                    | c НДС
+                        .col-md-1
+                        .col-md-3
+                            label(for="days") Срок выполнения, дней
+                        .col-md-1
+                            input.form-control(type="text" name="detail_days--1" placeholder="Срок")
+                        .col-md-2
+                            .btn-group.btn-group-toggle(data-toggle="buttons")
+                                label.btn.btn-primary.active
+                                    input(type="radio" name="days" autocomplete="off" checked="" value="true")
+                                    | Календарных
+                                label.btn.btn-primary
+                                    input( type="radio" name="days" autocomplete="off" value="false")
+                                    | Рабочих
+            .row
+                .col-md-2
+                    button.btn.btn-primary#add-detail(type="button") Добавить деталь
+                .col-md-2
+                    button.btn.btn-danger#remove-detail(type="button") Удалить деталь
+        
+            .row
+                .col-md-1
+                    label(for="operations") Операции
+                .col-md-4
+                    select.form-control#operations(name="operations" size="3" multiple)
+                        option(value="Строгальные станки") Строгальные станки
+                        option(value="Зубообрабатывающие станки") Зубообрабатывающие станки
+                        option(value="Зуборезные работы") Зуборезные работы
+                        option(value="Зубошлифовальные станки") Зубошлифовальные станки
+                        option(value="Координатно-расточные станки") Координатно-расточные станки
+                        option(value="Токарные и Фрезерные станки") Токарные и Фрезерные станки
+                        option(value="Токарные станки") Токарные станки
+                        option(value="Фрезерные станки") Фрезерные станки
+                        option(value="Токарные и Фрезерные станки Крупногабаритные") Токарные и Фрезерные станки Крупногабаритные
+                        option(value="Токарные станки Крупногабаритные") Токарные станки Крупногабаритные
+                        option(value="Токарно-карусельная обработка") Токарно-карусельная обработка
+                        option(value="Фрезерные станки Крупногабаритные") Фрезерные станки Крупногабаритные
+                        option(value="Токарные автоматы") Токарные автоматы
+                        option(value="Числовое Программное Управление") Числовое Программное Управление
+                        option(value="Токарные станки с ЧПУ") Токарные станки с ЧПУ
+                        option(value="Токарно-фрезерные станки с ЧПУ") Токарно-фрезерные станки с ЧПУ
+                        option(value="Фрезерные станки с ЧПУ") Фрезерные станки с ЧПУ
+                        option(value="Числовое Программное Управление, Крупногабаритные") Числовое Программное Управление, Крупногабаритные
+                        option(value="Токарные станки с ЧПУ Крупногабаритные") Токарные станки с ЧПУ Крупногабаритные
+                        option(value="Токарно-карусельная обработка с ЧПУ") Токарно-карусельная обработка с ЧПУ
+                        option(value="Токарно-фрезерные станки с ЧПУ Крупногабаритные") Токарно-фрезерные станки с ЧПУ Крупногабаритные
+                        option(value="Фрезерные станки с ЧПУ Крупногабаритные") Фрезерные станки с ЧПУ Крупногабаритные
+                        option(value="Шлифование + Суперфиниширование") Шлифование + Суперфиниширование
+                        option(value="Хонингование") Хонингование
+                        option(value="Внутришлифовальные станки") Внутришлифовальные станки
+                        option(value="Круглошлифовальные станки") Круглошлифовальные станки
+                        option(value="Плоскошлифовальные станки") Плоскошлифовальные станки
+                        option(value="Электроэрозия") Электроэрозия
+                        option(value="Сверление и зенкерование") Сверление и зенкерование
+                        option(value="Слесарно-сборочные работы") Слесарно-сборочные работы
+                .col-md-1
+                    label(for="operations") Длина
+                .col-md-1
+                    input.form-control(type="text" name="length" placeholder="Длина")
+                .col-md-1
+                    label Ширина
+                .col-md-1
+                    input.form-control(type="text" name="width" placeholder="Ширина")
+                .col-md-1
+                    label Высота
+                .col-md-1
+                    input.form-control(type="text" name="height" placeholder="Высота")
+            .row
+                .col-md-12
+                    h3
+                        b Итого
+            .row
+                .col-md-1
+                    label Материал
+                .col-md-2
+                    input.form-control(type="text")
+            .row
+                .col-md-1
+                    label(for="") Бюджет, руб
+                .col-md-1
+                    input.form-control(type="text" name="total_price" placeholder="Цена")
+                .col-md-2
+                    .btn-group.btn-group-toggle(data-toggle="buttons")
+                        label.btn.btn-primary.active
+                            input(type="radio" name="total_nds" autocomplete="off" checked="" value="true")
+                            | без НДС
+                        label.btn.btn-primary
+                            input( type="radio" name="total_nds" autocomplete="off" value="false")
+                            | c НДС
+                .col-md-1
+                .col-md-3
+                    label(for="days") Срок выполнения, дней
+                .col-md-1
+                    input.form-control(type="text" name="total_days" placeholder="Срок")
+                .col-md-2
+                    .btn-group.btn-group-toggle(data-toggle="buttons")
+                        label.btn.btn-primary.active
+                            input(type="radio" name="days" autocomplete="off" checked="" value="true")
+                            | Календарных
+                        label.btn.btn-primary
+                            input( type="radio" name="days" autocomplete="off" value="false")
+                            | Рабочих
+            .row
+                .col-md-2
+                    label Комментарий
+                .col-md-4
+                    textarea.form-control(name="comment" cols="30" rows="5")
+                .col-md-1
+                .col-md-2
+                    label Прикрепить чертеж
+                .col-md-3
+                    input.form-control-file(type="file")
+
+
+                
+                    
+                    
+
+        .modal-footer
+          button.btn.btn-primary(type="submit") Cохранить
+          button.btn.btn-primary(type="button") Показать подходящих исполнителей
+          button.btn.btn-secondary#close-modal--bottom(type="button" data-dismiss="modal") Закрыть

@@ -75,6 +75,12 @@
 			animation: tick 180ms ease-in;
 		}
 
+		&.is-changed:checked + .label-text:before {
+			content: "";
+			color: $yellow;
+			animation: tick 180ms ease-in;
+		}
+
 		&:disabled + .label-text {
 			cursor: not-allowed !important;
 
